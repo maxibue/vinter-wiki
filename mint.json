@@ -1,0 +1,80 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "vinter.wiki",
+  "logo": {
+    "dark": "/logo/MainLogo.png",
+    "light": "/logo/MainLogo_dark.png"
+  },
+  "favicon": "/favicon.png",
+	"colors": {
+		"primary": "#8F64F2",
+		"light": "#BFA6F9",
+		"dark": "#6036BF"
+	},
+  "topbarCtaButton": {
+    "name": "Discord Bot",
+    "url": "bot.vinter.wiki"
+  },
+		"anchors": [
+		{
+			"name": "GitHub",
+			"icon": "github",
+			"url": "https://github.com/discolalo/vinter-wiki"
+		},
+		{
+			"name": "Community",
+			"icon": "discord",
+			"url": "https://discord.com/invite/longvinter"
+		}
+	],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": ["home", "guides/starting_guide"]
+    },
+    {
+      "group": "Gameplay",
+      "pages": ["gameplay/gameplay", "gameplay/quests", "gameplay/fishing", "gameplay/crafting", "gameplay/hunting", "gameplay/planting", "gameplay/cooking", "gameplay/compendium", "gameplay/equipment", "gameplay/airdrops", "gameplay/energy"]
+    },
+    {
+      "group": "Items",
+      "pages": ["items/items",
+      {
+        "group": "Item List",
+        "icon": "list",
+        "pages": [
+          "items/research_tent",
+          "items/fence",
+          "items/chainsaw",
+          "items/strawberry_hat"
+        ]
+      }
+    ]
+    },
+    {
+      "group": "Map",
+      "pages": ["map/map", "map/docks", "map/arenas", "map/bunkers", "map/casino", "map/shops", "map/vending_machines",
+      {
+        "group": "Store List",
+        "icon": "store",
+        "pages": [
+          "map/james_general_store"
+        ]
+      }
+    ]
+    },
+    {
+      "group": "Guides",
+      "pages": ["guides/guides", "guides/starting_guide", "guides/building_a_house", "guides/bird_farm_guide"]
+    },
+    {
+      "group": "Base",
+      "pages": ["base/base", "base/greenhouse"]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/discolalo",
+    "discord": "https://discord.com/invite/longvinter"
+  },
+  "backgroundImage": "/background.png"
+}
