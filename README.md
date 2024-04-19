@@ -14,7 +14,7 @@ Telling me about mistakes you've found would also really help me in making this 
 
 ## Author
 
-Message [@discolalo](https://github.com/discolalo) regarding anything wiki & or repository related.
+Message [@maximierung](https://github.com/maximierung) regarding anything wiki & or repository related.
 
 ## Affiliation
 
