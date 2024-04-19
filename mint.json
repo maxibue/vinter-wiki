@@ -13,13 +13,13 @@
 	},
   "topbarCtaButton": {
     "name": "Discord Bot",
-    "url": "bot.vinter.wiki"
+    "url": "vinter.wiki"
   },
 		"anchors": [
 		{
 			"name": "GitHub",
 			"icon": "github",
-			"url": "https://github.com/discolalo/vinter-wiki"
+			"url": "https://github.com/maximierung/vinter-wiki"
 		},
 		{
 			"name": "Community",
@@ -73,7 +73,7 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/discolalo",
+    "github": "https://github.com/maximierung/vinter-wiki",
     "discord": "https://discord.com/invite/longvinter"
   },
   "backgroundImage": "/background.png"
