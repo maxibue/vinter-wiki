@@ -77,7 +77,7 @@
     "discord": "https://discord.com/invite/longvinter"
   },
   "modeToggle": {
-  "default": "light",
+  "default": "dark",
   "isHidden": false
   },
   "backgroundImage": "/background.png"
