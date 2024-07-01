@@ -83,6 +83,10 @@
     {
       "group": "Base",
       "pages": ["base/base", "base/greenhouse"]
+    },
+    {
+      "group": "Server",
+      "pages": ["server/linux", "server/windows"]
     }
   ],
   "footerSocials": {
