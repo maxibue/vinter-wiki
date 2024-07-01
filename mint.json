@@ -20,24 +20,24 @@
     }
   },
   "topbarCtaButton": {
-    "name": "Need Help?",
+    "name": "Get Help",
     "url": "https://discord.gg/longvinter"
   },
 		"anchors": [
 		{
-			"name": "GitHub",
-			"icon": "github",
-			"url": "https://github.com/uuvana-studios/vinter-wiki"
-		},
-		{
-			"name": "Discord",
+			"name": "Discodr Server",
 			"icon": "discord",
 			"url": "https://discord.com/invite/longvinter"
 		},
   	{
-			"name": "Website",
+			"name": "Longvinter Website",
 			"icon": "globe",
 			"url": "https://longvinter.com/"
+		},
+    {
+			"name": "GitHub Repo",
+			"icon": "github",
+			"url": "https://github.com/uuvana-studios/vinter-wiki"
 		}
 	],
   "navigation": [
