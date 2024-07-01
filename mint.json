@@ -7,9 +7,9 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#e0c286",
-    "light": "#e0c286",
-    "dark": "#e0c286",
+    "primary": "#FAEBCB",
+    "light": "#FAEBCB",
+    "dark": "#FAEBCB",
     "anchors": {
       "from": "#202020",
       "to": "#202020"
@@ -86,7 +86,7 @@
   },
   "modeToggle": {
   "default": "dark",
-  "isHidden": true
+  "isHidden": false
   },
   "backgroundImage": "/background.png"
 }
