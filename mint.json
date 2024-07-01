@@ -86,7 +86,7 @@
   },
   "modeToggle": {
   "default": "dark",
-  "isHidden": true
+  "isHidden": false
   },
   "backgroundImage": "/background.png"
 }
