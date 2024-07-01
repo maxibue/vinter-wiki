@@ -27,12 +27,17 @@
 		{
 			"name": "GitHub",
 			"icon": "github",
-			"url": "https://github.com/maximierung/vinter-wiki"
+			"url": "https://github.com/uuvana-studios/vinter-wiki"
 		},
 		{
-			"name": "Community",
+			"name": "Discord",
 			"icon": "discord",
 			"url": "https://discord.com/invite/longvinter"
+		},
+  	{
+			"name": "Website",
+			"icon": "globe",
+			"url": "https://longvinter.com/"
 		}
 	],
   "navigation": [
