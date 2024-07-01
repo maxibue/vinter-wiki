@@ -76,5 +76,9 @@
     "github": "https://github.com/maximierung/vinter-wiki",
     "discord": "https://discord.com/invite/longvinter"
   },
+  "modeToggle": {
+  "default": "light",
+  "isHidden": false
+  },
   "backgroundImage": "/background.png"
 }
