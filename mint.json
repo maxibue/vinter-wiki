@@ -7,9 +7,9 @@
   },
   "favicon": "/favicon.png",
 	"colors": {
-		"primary": "#14152F",
+		"primary": "#FAEBCB",
 		"light": "#BFA6F9",
-		"dark": "#6036BF"
+		"dark": "#14152F"
 	},
   "topbarCtaButton": {
     "name": "Discord Community",
