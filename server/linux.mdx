@@ -1,43 +1,184 @@
 ---
-title: Linux Server Installation
-description: 'Information on bases in Longvinter.'
-icon: 'house'
+title: Vanilla Server Setup
+description: 'Guide for setting up a Longvinter server on Linux.'
+icon: 'server'
 ---
 
-<Note>**Note:** This is setup for VPS / Dedicated Server. IF you are using managed hosting, please check their website for related informations.</Note>
+<Note>If you have any trouble following this guide, please send us a message on [Discord](https://discord.gg/longvinter) or the [Uuvana Forums](https://forum.uuvana.com/t/longvinter-questions-and-help). We are more than happy to help you out!</Note>
 
-## Research Tent
+## Requirements and Pre-requisites
 
-Tents can be purchased at Sgt. Lakes Outpost and Arturs Outpost for around 700 mk. Each player can place a maximum of 2 tents/houses. You will have 24 hours to upgrade their tent to a house. If it is not completed within 24 hours, the tent will be removed along with items placed inside the tent. A workbench is needed for depositing 100 pieces of wood in order to upgrade the tent into a house.
+- SteamCMD installed in your system
+- Broadband internet connection
+- Min. 2 GB RAM
+- Min. 64-bit Linux Operating System
+- Router with the ability to port forward 
 
-## House
+<Warning>Some ISPs might not allow you to port forward. In such case, we recommend you to purchase VPS / Dedicated Server hosting services.</Warning>
 
-Once you deposited all the required wood, you can pick between 5 different house colours: red, blue, mint, pink, and yellow. You will also be prompted to set a 5 digit PIN code. Do not give this code to anyone you don’t trust! This PIN code can be shared to other players that you wish to grant access inside your house. You can view the decay status of your house under the “Decay” tab within the workbench. Add wood to prevent your house from being removed permanently.
+--- 
+<Steps>
+    <Step title="System Setup" icon="user-plus">
 
----
+    ### Creating user and group to run the server
 
-**Tips:**
+    ```shell
+    sudo useradd -m -d /home/steam steamcmd
+    sudo passwd steamcmd
+    sudo usermod -aG sudo steamcmd
+    sudo su steamcmd
+    ```
 
-- You do not need to enter the PIN code to enter your own house.
-- If “share house with team” is selected, teammates will be able to enter your house without the PIN code.
-- Change your code if you want to revoke access from teammates.
+    ### Installing GIT, GIT Large file system and other requisites
 
-## Electricity Upgrade Path
+    <Tabs>
+    <Tab title="Ubuntu/Debian">
+        ```shell
+        sudo apt update
+        sudo apt install steamcmd
+        sudo add-apt-repository multiverse
+        sudo dpkg --add-architecture i386
+        sudo apt update
+        sudo apt install lib32gcc-s1 steamcmd
+        ```
+    </Tab>
+    <Tab title="Arch-Linux">
+        ```shell
+        sudo pacman -Sy
+        git clone https://aur.archlinux.org/steamcmd.git
+        cd steamcmd
+        makepkg -si
+        sudo ln -s /usr/games/steamcmd /home/steam/steamcmd
+        ```
+    </Tab>
+    <Tab title="Fedora">
+        ```shell
+        sudo yum update
+        sudo yum install steamcmd
+        ```
+    </Tab>
+    </Tabs>
 
-There are currently two different electricity upgrade paths you can choose for your house. Your choice is locked after your first upgrade. You can pick between Sustainable or Fuel powered.
+   ### Making directory for Longvinter server
+    ```shell
+    sudo mkdir longvinter-server
+    ```
+    </Step>
 
-### Sustainable
+<Step title="Install Steam SDK" icon="steam">
+```shell
+cd ~/
+mkdir steamcmd-source
+cd steamcmd-source
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+tar -xvzf steamcmd_linux.tar.gz
+./steamcmd.sh +force_install_dir . +login anonymous +app_update 1007 +quit
+```
 
-Sustainable powered houses will be equipped with a windmill and solar panels. Windmills provides a continuous flow of 50 electricity during the day and night. Solar panels will only generate 25 electricity during the day time.
+### Copying Steam SDK to the right place
 
-### Fuel Powered
+```shell
+cd ~/.steam
+mkdir sdk64
+cp ~/steamcmd-source/linux64/steamclient.so ~/.steam/sdk64/
+```
 
-Fuel powered houses will be equipped with a large generator. The large generator provides 110 electricity during the day and night. However, fuel cans need to be added at the workbench for electricity generation. Each fuel can provides 3 hours of electricity generation.
+</Step>
 
-## Dark Panel Interior Upgrade
+<Step title="Configure Port-forwarding and Firewalls" icon="block-brick-fire">
 
-This is purely a cosmetic upgrade to turn your floor into black tiles.
+<Note>**Warning:** In other tutorials it is asked to open the TCP Port 7777, do not do it. Unreal Engine doesn't use TCP connections - you would be leaving an unused port open by doing so!</Note>
 
-## Second Floor Upgrade
+<Tabs>
+  <Tab title="IPTables">
+    ```shell
+    sudo iptables -I INPUT -p udp --dport 7777 -j ACCEPT
+    sudo iptables -I INPUT -p udp --dport 27016 -j ACCEPT
+    sudo iptables -I INPUT -p tcp --dport 27016 -j ACCEPT
+    sudo iptables -I INPUT -p udp --dport 27015 -j ACCEPT
+    sudo iptables -I INPUT -p tcp --dport 27015 -j ACCEPT
+    ```
+  </Tab>
+  <Tab title="Uncomplicated Firewall (UFW)">
+    ```shell
+    sudo ufw allow 7777/udp
+    sudo ufw allow 27016
+    sudo ufw allow 27015
+    ```
+  </Tab>
+</Tabs>
 
-This upgrade will change the interior and exterior look of your house. You will have a second floor allowing more space to place containers and furniture.
+</Step>
+
+<Step title="Install the Server" icon="download">
+
+```shell
+cd ~/
+git clone https://github.com/Uuvana-Studios/longvinter-linux-server.git
+sudo chmod -R ugo+rwx longvinter-linux-server/
+```
+
+</Step>
+
+<Step title="Customize the Server" icon="cog">
+
+```shell
+nano ~/longvinter-linux-server/Longvinter/Saved/Config/LinuxServer/Game.ini
+```
+
+Add the following content:
+
+```ini
+[/Game/Blueprints/Server/GI_AdvancedSessions.GI_AdvancedSessions_C]
+ServerName=Unnamed Island
+ServerTag=Default
+MaxPlayers=32
+ServerMOTD=Welcome to Longvinter Island!
+Password=
+CommunityWebsite=www.longvinter.com
+
+[/Game/Blueprints/Server/GM_Longvinter.GM_Longvinter_C]
+AdminSteamID=76561198965966997
+PVP=true
+TentDecay=true
+MaxTents=2
+ChestRespawnTime=600
+```
+
+</Step>
+
+<Step title="Run the Server" icon="play">
+
+### Start the server manually
+
+```shell
+sh /home/steam/longvinter-linux-server/LongvinterServer.sh
+```
+
+### Start the server automatically with Systemd (Recommended)
+
+```shell
+sudo cp /home/steam/longvinter-linux-server/longvinter.service /etc/systemd/system/longvinter.service
+sudo cp /home/steam/longvinter-linux-server/longvinter.socket /etc/systemd/system/longvinter.socket
+sudo systemctl daemon-reload
+```
+
+</Step>
+
+<Step title="Server Maintenance" icon="tools">
+
+### Updating the server
+
+```shell
+bash /home/steam/longvinter-linux-server/LongvinterUpdate.sh
+```
+
+### Backing up your saves
+
+```shell
+bash /home/steam/longvinter-linux-server/LongvinterBackup.sh
+```
+
+</Step>
+
+</Steps>
