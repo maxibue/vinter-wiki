@@ -16,7 +16,8 @@ icon: 'server'
 
 <Warning>Some ISPs might not allow you to port forward. In such case, we recommend you to purchase VPS / Dedicated Server hosting services.</Warning>
 
---- 
+## Installing Server
+
 <Steps>
     <Step title="System Setup" icon="user-plus">
 
@@ -29,20 +30,16 @@ icon: 'server'
     sudo su steamcmd
     ```
 
-    ### Installing GIT, GIT Large file system and other requisites
-
+    ### Installing SteamCMD
+    
     <Tabs>
     <Tab title="Ubuntu/Debian">
         ```shell
         sudo apt update
-        sudo apt install steamcmd
-        sudo add-apt-repository multiverse
-        sudo dpkg --add-architecture i386
-        sudo apt update
         sudo apt install lib32gcc-s1 steamcmd
         ```
     </Tab>
-    <Tab title="Arch-Linux">
+    <Tab title="Arch">
         ```shell
         sudo pacman -Sy
         git clone https://aur.archlinux.org/steamcmd.git
@@ -65,7 +62,7 @@ icon: 'server'
     ```
     </Step>
 
-<Step title="Install Steam SDK" icon="steam">
+<Step title="Steam SDK Setup" icon="steam">
 ```shell
 cd ~/
 mkdir steamcmd-source
@@ -110,7 +107,7 @@ cp ~/steamcmd-source/linux64/steamclient.so ~/.steam/sdk64/
 
 </Step>
 
-<Step title="Install the Server" icon="download">
+<Step title="Install Longvinter Server" icon="download">
 
 ```shell
 cd ~/
@@ -120,7 +117,7 @@ sudo chmod -R ugo+rwx longvinter-linux-server/
 
 </Step>
 
-<Step title="Customize the Server" icon="cog">
+<Step title="Customize the Server" icon="gear">
 
 ```shell
 nano ~/longvinter-linux-server/Longvinter/Saved/Config/LinuxServer/Game.ini
@@ -165,7 +162,7 @@ sudo systemctl daemon-reload
 
 </Step>
 
-<Step title="Server Maintenance" icon="tools">
+<Step title="Server Maintenance" icon="traffic-cone">
 
 ### Updating the server
 
