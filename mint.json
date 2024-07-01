@@ -20,17 +20,17 @@
     }
   },
   "topbarCtaButton": {
-    "name": "Get Help",
+    "name": "Need Help?",
     "url": "https://discord.gg/longvinter"
   },
 		"anchors": [
 		{
-			"name": "Discodr Server",
+			"name": "Discord Server",
 			"icon": "discord",
 			"url": "https://discord.com/invite/longvinter"
 		},
   	{
-			"name": "Longvinter Website",
+			"name": "Main Website",
 			"icon": "globe",
 			"url": "https://longvinter.com/"
 		},
