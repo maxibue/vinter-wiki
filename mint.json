@@ -6,11 +6,19 @@
     "light": "/logo/MainLogo_dark.png"
   },
   "favicon": "/favicon.png",
-	"colors": {
-		"primary": "#FAEBCB",
-		"light": "#BFA6F9",
-		"dark": "#14152F"
-	},
+  "colors": {
+    "primary": "#000000",
+    "light": "#ffffff",
+    "dark": "#000000",
+    "anchors": {
+      "from": "#202020",
+      "to": "#202020"
+    },
+    "background": {
+      "dark": "#121212",
+      "light": "#ffffff"
+    }
+  },
   "topbarCtaButton": {
     "name": "Discord Community",
     "url": "vinter.wiki"
