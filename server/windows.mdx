@@ -8,93 +8,107 @@ icon: 'windows'
 
 ## Requirements and Pre-requisites
 
-- Min. 2 GB RAM 
-- Min. 64-bit Windows Operating System (Windows 10 or later recommended)
-- Min. CPU with least 3GHz clock speed
+- Min. 3 GB RAM
+- Min. 64-bit Windows 10 Operating System
+- Min. CPU with at least 3GHz clock speed
 - Broadband internet connection
-- Router with the ability to port forward 
-- SteamCMD installed on your system
+- Router with the ability to port forward
+- SteamCMD installed in your system
 
 <Warning>Some ISPs might not allow you to port forward. In such case, we recommend you to purchase VPS / Dedicated Server services.</Warning>
 
 ## Installing Server
 
 <Steps>
-    <Step title="System Setup" icon="desktop">
-
+    <Step title="System Setup" icon="user-plus">
+    
     ### Installing SteamCMD
     
-    1. Create a folder for SteamCMD (e.g., `C:\SteamCMD`)
+    1. Create a new folder for SteamCMD (e.g., `C:\steamcmd`)
     2. Download SteamCMD from [here](https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip)
-    3. Extract the contents to the folder you created
+    3. Extract the contents of the zip file to the folder you created
+    4. Run `steamcmd.exe` to install/update SteamCMD
 
     ### Making directory for Longvinter server
-
-    ```cmd
-    mkdir C:\longvinter-server
-    ```
+    
+    Create a new folder for the Longvinter server (e.g., `C:\longvinter-server`)
+    
     </Step>
 
-    <Step title="Steam SDK Setup" icon="steam">
-    ```cmd
-    cd C:\SteamCMD
-    steamcmd.exe +force_install_dir . +login anonymous +app_update 1007 +quit
-    ```
-
-    ### Copying Steam SDK to the right place
-
-    ```cmd
-    mkdir C:\Program Files (x86)\Steam\steamapps\common\Steamworks Shared
-    xcopy /E /I C:\SteamCMD\steamapps\common\Steamworks Shared\_CommonRedist "C:\Program Files (x86)\Steam\steamapps\common\Steamworks Shared\_CommonRedist"
-    ```
-
-    </Step>
-
-    <Step title="Configure Port-forwarding and Firewalls" icon="shield-alt">
+    <Step title="Configure Port-forwarding and Firewalls" icon="block-brick-fire">
 
     <Note>**Warning:** In other tutorials it is asked to open the TCP Port 7777, do not do it. Unreal Engine doesn't use TCP connections - you would be leaving an unused port open by doing so!</Note>
 
-    1. Open Windows Firewall with Advanced Security
+    1. Open Windows Defender Firewall with Advanced Security
     2. Create new Inbound Rules for the following:
        - UDP port 7777
-       - UDP and TCP ports 27015-27016
+       - TCP and UDP ports 27015 and 27016
+
+    <Frame caption="Open Windows firewall">
+      <img src="https://user-images.githubusercontent.com/3257540/158257002-fdd91104-b661-46f8-90de-a07c0d724c91.png" />
+    </Frame>
+
+    <Frame caption="Select 'Port' option">
+      <img src="https://user-images.githubusercontent.com/3257540/158257053-1d9cab7d-666a-4bef-9871-09d6fcc445db.png" />
+    </Frame>
+
+    <Frame caption="Enter port and select protocol">
+      <img src="https://user-images.githubusercontent.com/3257540/158257096-96d8de79-80a3-483a-98ed-da830fe89a6b.png" />
+    </Frame>
+
+    <Frame caption="Allow the connection">
+      <img src="https://user-images.githubusercontent.com/3257540/158257123-674efc62-ba90-4c96-b753-5124929500b8.png" />
+    </Frame>
+
+    <Frame caption="Select all profiles">
+      <img src="https://user-images.githubusercontent.com/3257540/158257155-ebba1e05-2f33-445b-bebb-b392e038edca.png" />
+    </Frame>
+
+    <Frame caption="Name the rule">
+      <img src="https://user-images.githubusercontent.com/3257540/158257182-f57e43d6-0905-4db5-ba67-5cf334c27711.png" />
+    </Frame>
+    
+    Also, make sure to forward these ports on your router.
 
     </Step>
 
     <Step title="Install Longvinter Server" icon="download">
 
-    ```cmd
-    cd C:\longvinter-server
-    C:\SteamCMD\steamcmd.exe +force_install_dir . +login anonymous +app_update 1639880 validate +quit
+    Open Command Prompt and run:
+
+    ```shell
+    C:\steamcmd\steamcmd.exe +force_install_dir C:\longvinter-server +login anonymous +app_update 1639880 validate +quit
     ```
 
     </Step>
 
     <Step title="Customize the Server" icon="gear">
 
-    Create and edit the configuration file:
-
-    ```cmd
-    notepad C:\longvinter-server\Longvinter\Saved\Config\WindowsServer\Game.ini
-    ```
-
-    Add the following content:
+    1. Navigate to `C:\longvinter-server\Longvinter\Saved\Config\WindowsServer\`
+    2. Create a new file named `Game.ini`
+    3. Open `Game.ini` with a text editor and add the following content:
 
     ```ini
     [/Game/Blueprints/Server/GI_AdvancedSessions.GI_AdvancedSessions_C]
-    ServerName=Unnamed Island
-    ServerTag=Default
-    MaxPlayers=32
-    ServerMOTD=Welcome to Longvinter Island!
-    Password=
-    CommunityWebsite=www.longvinter.com
+    ServerName=[EU-WEST] Arlo's Hangout
+    ServerMOTD=Welcome to Arlo's Hangout
+    MaxPlayers=64
+    Password=arlobest123
+    CommunityWebsite=discord.gg/longvinter
+    CoopPlay=false
+    CheckVPN=true
+    CoopSpawn=0
+    Tag=none
+    ChestRespawnTime=900
+    DisableWanderingTraders=false
 
     [/Game/Blueprints/Server/GM_Longvinter.GM_Longvinter_C]
-    AdminSteamID=76561198965966997
-    PVP=true
+    AdminSteamID=00023652dd9b4673be20d4f83ab42c5b 0002365d948ad82f373be20d4ff8ab42c5b
+    PVP=false
     TentDecay=true
-    MaxTents=2
-    ChestRespawnTime=600
+    MaxTents=3
+    RestartTime24h=6
+    SaveBackups=true
     ```
 
     <Card title="Configuration" icon="gear" href="server/config">
@@ -104,42 +118,41 @@ icon: 'windows'
     </Step>
 
     <Step title="Run the Server" icon="play">
+    
+    To start the server manually:
 
-    ### Start the server manually
+    1. Open Command Prompt
+    2. Navigate to your Longvinter server directory:
+       ```shell
+       cd C:\longvinter-server
+       ```
+    3. Run the server:
+       ```shell
+       LongvinterServer.exe
+       ```
 
-    ```cmd
-    cd C:\longvinter-server
-    LongvinterServer.exe
-    ```
-
-    ### Start the server automatically (Optional)
-
-    1. Create a batch file named `StartLongvinterServer.bat` with the following content:
-
-    ```batch
-    @echo off
-    cd C:\longvinter-server
-    start LongvinterServer.exe
-    ```
-
-    2. Create a shortcut to this batch file in the Windows Startup folder (`%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup`)
+    For automatic startup, you can create a batch file or use Windows Task Scheduler.
 
     </Step>
 
-    <Step title="Server Maintenance" icon="tools">
+    <Step title="Server Maintenance" icon="traffic-cone">
+    <Tabs>
+        <Tab title="Updating the Server">
+        Run the following command to update your Longvinter server:
 
-    ### Updating the server
+        ```shell
+        C:\steamcmd\steamcmd.exe +force_install_dir C:\longvinter-server +login anonymous +app_update 1639880 validate +quit
+        ```
+        </Tab>
+        <Tab title="Backing Up Saves">
+        Use this command to create a backup of your server saves:
 
-    ```cmd
-    cd C:\longvinter-server
-    C:\SteamCMD\steamcmd.exe +force_install_dir . +login anonymous +app_update 1639880 validate +quit
-    ```
-
-    ### Backing up your saves
-
-    ```cmd
-    xcopy /E /I C:\longvinter-server\Longvinter\Saved C:\longvinter-backup-%date:~-4,4%%date:~-10,2%%date:~-7,2%
-    ```
+        ```shell
+        xcopy /E /I /Y C:\longvinter-server\Longvinter\Saved C:\longvinter-backup-%date:~-4,4%%date:~-10,2%%date:~-7,2%
+        ```
+        
+        </Tab>
+    </Tabs>
     </Step>
 </Steps>
 
@@ -155,5 +168,3 @@ icon: 'windows'
 </CardGroup>
 
 <Tip>Please contact **@alvar_noah** if there are any errors.</Tip>
-
-
