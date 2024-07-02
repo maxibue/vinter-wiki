@@ -86,7 +86,7 @@
     },
     {
       "group": "Server",
-      "pages": ["server/linux", "server/windows", "server/configuration", "server/faq"]
+      "pages": ["server/server", "server/linux", "server/windows", "server/configuration", "server/faq"]
     }
   ],
   "footerSocials": {
