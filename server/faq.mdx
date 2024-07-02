@@ -26,6 +26,10 @@ If your question isn't answered here, please join our [Discord](https://discord.
     Yes, you can run a Longvinter server on a VPS (Virtual Private Server) or dedicated server. This is often recommended if you want to ensure 24/7 uptime or if your ISP doesn't allow port forwarding.
   </Accordion>
 
+  <Accordion icon="docker" title="Can I run a Longvinter server on a Docker container?">
+    Yes. You can refer to old server documentation for Docker installation in [Linux](https://docs-server.longvinter.com/linux/setup-docker/) or [Windows](https://docs-server.longvinter.com/linux/setup-docker/). 
+  </Accordion>
+
   <Accordion icon="users" title="How many players can connect to a Longvinter server?">
     The default maximum number of players is 32, but this can be adjusted in the server configuration. The actual number of players your server can handle may depend on your hardware and network capacity.
   </Accordion>
@@ -57,7 +61,22 @@ If your question isn't answered here, please join our [Discord](https://discord.
     
     Replace `YourPasswordHere` with your desired password. Remember to use only letters and numbers.
   </Accordion>
+  <Accordion icon="flag" title="How do I manually change server region?">
+
+  Servers might be listed in wrong regions occasionally. Please add below line to your configuration file to change region.
+
+   <ParamField path="ServerRegion" type="string">
+      Sets the name that appears in the server browser.
+      
+      **Note:** Available regions are EU, NA, SA, AS, AU
+
+      **Example:** `ServerRegion=AS`
+    </ParamField>
+      Then restart your server.
+  </Accordion>
 </AccordionGroup>
+
+
 
 ## Troubleshooting
 
@@ -97,20 +116,6 @@ If your question isn't answered here, please join our [Discord](https://discord.
   
   Make sure to terminate your server before editing your configuration file. 
 
-  </Accordion>
-
-  <Accordion icon="flag" title="My server is showing up in the wrong region. What should I do?">
-
-  Please add below line to your configuration file.
-
-   <ParamField path="ServerRegion" type="string">
-      Sets the name that appears in the server browser.
-      
-      **Note:** Available regions are EU, NA, SA, AS, AU
-
-      **Example:** `ServerRegion=AS`
-    </ParamField>
-      Then restart your server.
   </Accordion>
 
   <Accordion icon="arrows-rotate" title="How do I update my Longvinter server?">
