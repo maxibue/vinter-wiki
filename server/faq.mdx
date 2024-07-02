@@ -15,7 +15,7 @@ If your question isn't answered here, please join our [Discord](https://discord.
     The minimum requirements for running a Longvinter server are:
     
     - Min. 3 GB RAM
-    - Min. 64-bit Operating System (Windows 10 or Linux)
+    - Min. 64-bit Operating System (Windows or Linux)
     - Min. CPU with at least 3GHz clock speed
     - Broadband internet connection
     - Router with the ability to port forward
@@ -76,18 +76,18 @@ If your question isn't answered here, please join our [Discord](https://discord.
   <Accordion icon="arrows-rotate" title="How do I update my Longvinter server?">
     To update your Longvinter server:
     
-    <CodeGroup>
-      <CodeBlock title="Windows">
+    <Tabs>
+      <Tab title="Windows">
       ```shell
       C:\steamcmd\steamcmd.exe +force_install_dir C:\longvinter-server +login anonymous +app_update 1639880 validate +quit
       ```
-      </CodeBlock>
-      <CodeBlock title="Linux">
+      </Tab>
+      <Tab title="Linux">
       ```shell
       steamcmd +force_install_dir ~/longvinter-server +login anonymous +app_update 1639880 validate +quit
       ```
-      </CodeBlock>
-    </CodeGroup>
+      </Tab>
+    </Tabs>
     
     After updating, restart your server.
   </Accordion>
