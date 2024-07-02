@@ -74,15 +74,16 @@ If your question isn't answered here, please join our [Discord](https://discord.
   </Accordion>
 
   <Accordion icon="arrows-rotate" title="How do I update my Longvinter server?">
-    To update your Longvinter server:
-    
+  
     <Tabs>
       <Tab title="Windows">
+      Open Command Prompt and run
       ```shell
       C:\steamcmd\steamcmd.exe +force_install_dir C:\longvinter-server +login anonymous +app_update 1639880 validate +quit
       ```
       </Tab>
       <Tab title="Linux">
+      Connect via SSH and run
       ```shell
       steamcmd +force_install_dir ~/longvinter-server +login anonymous +app_update 1639880 validate +quit
       ```
