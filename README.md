@@ -14,4 +14,4 @@ Telling us about mistakes you've found would also really help me in making this 
 
 ## Author
 
-The original author of this wiki is [@maximierung](https://github.com/maximierung) and now maintained by Uuvana Studios.
+The original author of this wiki is [@maximierung](https://github.com/maximierung) and now maintained by Arlo (Uuvana Studios).
