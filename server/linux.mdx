@@ -1,224 +1,142 @@
 ---
-title: Linux Server Setup
-description: 'Guide for setting up a Longvinter server on Linux.'
-icon: 'linux'
+title: Longvinter Server Configuration
+description: 'Detailed guide for configuring your Longvinter server.'
+icon: 'gear'
 ---
 
-<Note>If you have any trouble following this guide, please send us a message on [Discord](https://discord.gg/longvinter) or the [Uuvana Forums](https://forum.uuvana.com/t/longvinter-questions-and-help). We are more than happy to help you out!</Note>
+This guide provides a comprehensive explanation of each configuration option for your Longvinter server. These settings can be found in the `Game.ini` file located at `~/longvinter-server/Longvinter/Saved/Config/LinuxServer/Game.ini`.
 
-## Requirements and Pre-requisites
+<Note>
+Remember to restart your server after making changes to the configuration file for the new settings to take effect.
+</Note>
 
-- Min. 2 GB RAM 
-- Min. 64-bit Linux Operating System
-- Min. CPU with least 3GHz clock speed
-- Broadband internet connection
-- Router with the ability to port forward 
-- SteamCMD installed in your system
+## Server Configuration
 
-<Warning>Some ISPs might not allow you to port forward. In such case, we recommend you to purchase VPS / Dedicated Server services.</Warning>
+<AccordionGroup>
+  <Accordion icon="server" title="Server Settings">
+    <ParamField path="ServerName" type="string" default="Unnamed Island">
+      Sets the name that appears in the server browser.
+      
+      **Note:** Avoid using "OFFICIAL" in the name to prevent confusion with officially hosted servers.
 
-## Installing Server
+      **Example:** `[EU-WEST] Uuvana #PVE`
+    </ParamField>
 
-<Steps>
-    <Step title="System Setup" icon="user-plus">
+    <ParamField path="ServerTag" type="string" default="Default">
+      Adds a tag for easier server searching.
+      
+      **Note:** Use only one tag and avoid the word "OFFICIAL" to distinguish from official servers.
 
-    ### Creating user and group to run the server
+      **Example:** `PVE`
+    </ParamField>
 
-    ```shell
-    sudo useradd -m -d /home/steam steamcmd
-    sudo passwd steamcmd
-    sudo usermod -aG sudo steamcmd
-    sudo su steamcmd
-    ```
+    <ParamField path="MaxPlayers" type="integer" default="32">
+      Sets the maximum number of players that can connect simultaneously.
 
-    ### Installing SteamCMD
-    
-    <Tabs>
-    <Tab title="Ubuntu/Debian">
-        ```shell
-        sudo apt update
-        sudo apt install lib32gcc-s1 steamcmd
-        ```
-    </Tab>
-    <Tab title="Arch">
-        ```shell
-        sudo pacman -Sy
-        git clone https://aur.archlinux.org/steamcmd.git
-        cd steamcmd
-        makepkg -si
-        sudo ln -s /usr/games/steamcmd /home/steam/steamcmd
-        ```
-    </Tab>
-    <Tab title="Fedora">
-        ```shell
-        sudo yum update
-        sudo yum install steamcmd
-        ```
-    </Tab>
-    </Tabs>
+      **Example:** `64`
+    </ParamField>
 
-   ### Making directory for Longvinter server
-    ```shell
-    sudo mkdir longvinter-server
-    ```
-    </Step>
+    <ParamField path="ServerMOTD" type="string" default="Welcome to Longvinter Island!">
+      Sets the Message of the Day displayed on signs around the island.
 
-<Step title="Steam SDK Setup" icon="steam">
-```shell
-cd ~/
-mkdir steamcmd-source
-cd steamcmd-source
-wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
-tar -xvzf steamcmd_linux.tar.gz
-./steamcmd.sh +force_install_dir . +login anonymous +app_update 1007 +quit
-```
+      **Example:** `Welcome to [EU-WEST] Uuvana #PVE`
+    </ParamField>
 
-### Copying Steam SDK to the right place
+    <ParamField path="Password" type="string" default="">
+      Sets a password for the server. Leave empty for no password.
+      
+      **Note:** Use only numbers and letters.
 
-```shell
-cd ~/.steam
-mkdir sdk64
-cp ~/steamcmd-source/linux64/steamclient.so ~/.steam/sdk64/
-```
+      **Example:** `SecurePass123`
+    </ParamField>
 
-</Step>
+    <ParamField path="CommunityWebsite" type="string" default="www.longvinter.com">
+      Promotes a website, displayed with the server message and openable in-game.
 
-<Step title="Configure Port-forwarding and Firewalls" icon="block-brick-fire">
+      **Example:** `www.discord.gg/longvinter`
+    </ParamField>
+  </Accordion>
 
-<Note>**Warning:** In other tutorials it is asked to open the TCP Port 7777, do not do it. Unreal Engine doesn't use TCP connections - you would be leaving an unused port open by doing so!</Note>
+  <Accordion icon="users-rectangle" title="Gameplay Settings">
+    <ParamField path="CoopPlay" type="boolean" default="false">
+      Enables or disables cooperative play mode.
 
-<Tabs>
-  <Tab title="IPTables">
-    ```shell
-    sudo iptables -I INPUT -p udp --dport 7777 -j ACCEPT
-    sudo iptables -I INPUT -p udp --dport 27016 -j ACCEPT
-    sudo iptables -I INPUT -p tcp --dport 27016 -j ACCEPT
-    sudo iptables -I INPUT -p udp --dport 27015 -j ACCEPT
-    sudo iptables -I INPUT -p tcp --dport 27015 -j ACCEPT
-    ```
-  </Tab>
-  <Tab title="Uncomplicated Firewall (UFW)">
-    ```shell
-    sudo ufw allow 7777/udp
-    sudo ufw allow 27016
-    sudo ufw allow 27015
-    ```
-  </Tab>
-</Tabs>
+      **Example:** `false`
+    </ParamField>
 
-</Step>
+    <ParamField path="CheckVPN" type="boolean" default="true">
+      Enables or disables VPN checking for connecting players.
 
-<Step title="Install Longvinter Server" icon="download">
+      **Example:** `true`
+    </ParamField>
 
-```shell
-cd ~/longvinter-server
-steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
-```
+    <ParamField path="CoopSpawn" type="integer" default="0">
+      Sets the cooperative spawn point on the island.
 
-</Step>
+      **Example:** `0`
+    </ParamField>
 
-<Step title="Customize the Server" icon="gear">
+    <ParamField path="PVP" type="boolean" default="true">
+      Enables or disables Player versus Player combat.
 
-```shell
-nano ~/longvinter-server/Longvinter/Saved/Config/LinuxServer/Game.ini
-```
+      **Example:** `false`
+    </ParamField>
 
-Add the following content:
+    <ParamField path="TentDecay" type="boolean" default="true">
+      Enables or disables tent decay to manage abandoned tents.
+
+      **Example:** `true`
+    </ParamField>
+
+    <ParamField path="MaxTents" type="integer" default="2">
+      Sets the maximum number of tents players can place on the server.
+
+      **Example:** `3`
+    </ParamField>
+
+    <ParamField path="ChestRespawnTime" type="integer" default="600">
+      Sets the maximum respawn time (in seconds) for loot chests.
+
+      **Example:** `900`
+    </ParamField>
+  </Accordion>
+
+  <Accordion icon="user-gear" title="Admin Settings">
+    <ParamField path="AdminSteamID" type="string" default="">
+      Assigns admin privileges to specified Steam IDs.
+      
+      **Note:** Add multiple IDs by separating them with a single space.
+
+      **Example:** `76561198965966997 76561198965966998`
+    </ParamField>
+
+    <ParamField path="RestartTime24h" type="integer">
+      Sets the daily restart time for the server (in 24-hour format).
+
+      **Example:** `6`
+    </ParamField>
+  </Accordion>
+</AccordionGroup>
+
+## Example Configuration
+
+Here's an example of a fully configured `Game.ini` file:
 
 ```ini
-[/Game/Blueprints/Server/GI_AdvancedSessions.GI_AdvancedSessions_C]
-ServerName=Unnamed Island
-ServerTag=Default
-MaxPlayers=32
-ServerMOTD=Welcome to Longvinter Island!
+[/game/blueprints/server/gi_advancedsessions.gi_advancedsessions_c]
+ServerName=[EU-WEST] Uuvana #PVE
+ServerMOTD=Welcome to [EU-WEST] Uuvana #PVE
 Password=
-CommunityWebsite=www.longvinter.com
+CommunityWebsite=www.discord.gg/longvinter
+CoopPlay=false
+CoopSpawn=0
+Tag=none
 
-[/Game/Blueprints/Server/GM_Longvinter.GM_Longvinter_C]
-AdminSteamID=76561198965966997
-PVP=true
+[/game/blueprints/server/gm_longvinter.gm_longvinter_c]
+AdminSteamID=
+PVP=false
 TentDecay=true
-MaxTents=2
-ChestRespawnTime=600
+MaxTents=3
+RestartTime24h=6
 ```
 
-  <Card title="Configuration" icon="gear" href="server/config">
-    Check our our configuratioin page for detailed informations.
-  </Card>
-
-</Step>
-
-<Step title="Run the Server" icon="play">
-
-### Start the server manually
-
-```shell
-cd ~/longvinter-server
-./LongvinterServer.sh
-```
-
-### Start the server automatically with Systemd (Recommended)
-
-Create a systemd service file:
-
-```shell
-sudo nano /etc/systemd/system/longvinter.service
-```
-
-Add the following content:
-
-```ini
-[Unit]
-Description=Longvinter Server
-After=network.target
-
-[Service]
-Type=simple
-User=steamcmd
-WorkingDirectory=/home/steam/longvinter-server
-ExecStart=/home/steam/longvinter-server/LongvinterServer.sh
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start the service:
-
-```shell
-sudo systemctl daemon-reload
-sudo systemctl enable longvinter.service
-sudo systemctl start longvinter.service
-```
-
-</Step>
-
-<Step title="Server Maintenance" icon="traffic-cone">
-
-### Updating the server
-
-```shell
-cd ~/longvinter-server
-steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
-```
-
-### Backing up your saves
-
-```shell
-cp -r ~/longvinter-server/Longvinter/Saved ~/longvinter-backup-$(date +%Y%m%d)
-```
-</Step>
-</Steps>
-
-## Getting Help
-
-<CardGroup cols={2}>
-  <Card title="FAQ" icon="question" href="server/faq">
-    Check our our FAQ page to find solutions for common issues.
-  </Card>
-  <Card title="Discord" icon="discord" href="https://discord.gg/longvinter">
-    Ask qeustions in our #dedicated-server-help channel located in our Discord server.
-  </Card>
-</CardGroup>
-
-<Tip>Please contact **@alvar_noah** if there's any errors.</Tip>
