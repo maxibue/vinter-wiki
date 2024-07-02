@@ -157,6 +157,28 @@ RestartTime24h=6
 SaveBackups=true
 ```
 
+## Server Parameters
+
+When running your Longvinter server, you can use the following parameters to customize its behavior:
+
+<ParamField query="-GamePort" type="integer" default="7777">
+  Sets the port that the game uses for client connections.
+
+  **Example:** `-GamePort=7777`
+</ParamField>
+
+<ParamField query="-QueryPort" type="integer" default="27016">
+  Sets the port used for server queries (e.g., server browser listings).
+
+  **Example:** `-QueryPort=27016`
+</ParamField>
+
+You can use these parameters when starting your server. For example:
+
+```shell
+LongvinterServer.exe -GamePort=7777 -QueryPort=27016
+```
+
 ## Getting Help
 
 <CardGroup cols={2}>
