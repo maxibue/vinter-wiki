@@ -1,0 +1,253 @@
+---
+title: Linux Server Setup
+description: 'Comprehensive guide for setting up a Longvinter server on Linux.'
+icon: 'linux'
+---
+
+Welcome to the Longvinter Linux server setup guide. This document will walk you through the process of setting up and maintaining your own Longvinter server on a Linux system.
+
+<Callout type="info">
+If you encounter any difficulties following this guide, please don't hesitate to reach out to us on [Discord](https://discord.gg/longvinter) or the [Uuvana Forums](https://forum.uuvana.com/t/longvinter-questions-and-help). We're here to help!
+</Callout>
+
+## Requirements and Pre-requisites
+
+<AccordionGroup>
+  <Accordion title="System Requirements">
+    - Minimum 2 GB RAM
+    - 64-bit Linux Operating System
+    - CPU with at least 3GHz clock speed
+    - Broadband internet connection
+  </Accordion>
+  <Accordion title="Network Requirements">
+    - Router with port forwarding capabilities
+    <Callout type="warning">
+    Some ISPs may not allow port forwarding. In such cases, we recommend using a VPS or Dedicated Server service.
+    </Callout>
+  </Accordion>
+  <Accordion title="Software Requirements">
+    - SteamCMD installed on your system
+  </Accordion>
+</AccordionGroup>
+
+## Installation Steps
+
+<Steps>
+  <Step title="System Setup" icon="user-plus">
+    ### Creating user and group to run the server
+
+    ```shell
+    sudo useradd -m -d /home/steam steamcmd
+    sudo passwd steamcmd
+    sudo usermod -aG sudo steamcmd
+    sudo su steamcmd
+    ```
+
+    ### Installing SteamCMD
+    
+    <Tabs>
+      <Tab title="Ubuntu/Debian">
+        ```shell
+        sudo apt update
+        sudo apt install lib32gcc-s1 steamcmd
+        ```
+      </Tab>
+      <Tab title="Arch">
+        ```shell
+        sudo pacman -Sy
+        git clone https://aur.archlinux.org/steamcmd.git
+        cd steamcmd
+        makepkg -si
+        sudo ln -s /usr/games/steamcmd /home/steam/steamcmd
+        ```
+      </Tab>
+      <Tab title="Fedora">
+        ```shell
+        sudo yum update
+        sudo yum install steamcmd
+        ```
+      </Tab>
+    </Tabs>
+
+    ### Making directory for Longvinter server
+    ```shell
+    sudo mkdir longvinter-server
+    ```
+    
+    <Tooltip text="This creates a dedicated directory for your Longvinter server files">
+      Why create a separate directory?
+    </Tooltip>
+  </Step>
+
+  <Step title="Steam SDK Setup" icon="steam">
+    ```shell
+    cd ~/
+    mkdir steamcmd-source
+    cd steamcmd-source
+    wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+    tar -xvzf steamcmd_linux.tar.gz
+    ./steamcmd.sh +force_install_dir . +login anonymous +app_update 1007 +quit
+    ```
+
+    ### Copying Steam SDK to the right place
+
+    ```shell
+    cd ~/.steam
+    mkdir sdk64
+    cp ~/steamcmd-source/linux64/steamclient.so ~/.steam/sdk64/
+    ```
+    
+    <Tooltip text="This ensures the server can communicate with Steam's infrastructure">
+      Why do we need the Steam SDK?
+    </Tooltip>
+  </Step>
+
+  <Step title="Configure Port-forwarding and Firewalls" icon="block-brick-fire">
+    <Callout type="warning">
+    In other tutorials, you might see instructions to open TCP Port 7777. Do not do this! Unreal Engine doesn't use TCP connections for this port - opening it would leave an unused port exposed.
+    </Callout>
+
+    <Tabs>
+      <Tab title="IPTables">
+        ```shell
+        sudo iptables -I INPUT -p udp --dport 7777 -j ACCEPT
+        sudo iptables -I INPUT -p udp --dport 27016 -j ACCEPT
+        sudo iptables -I INPUT -p tcp --dport 27016 -j ACCEPT
+        sudo iptables -I INPUT -p udp --dport 27015 -j ACCEPT
+        sudo iptables -I INPUT -p tcp --dport 27015 -j ACCEPT
+        ```
+      </Tab>
+      <Tab title="Uncomplicated Firewall (UFW)">
+        ```shell
+        sudo ufw allow 7777/udp
+        sudo ufw allow 27016
+        sudo ufw allow 27015
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Install Longvinter Server" icon="download">
+    ```shell
+    cd ~/longvinter-server
+    steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
+    ```
+  </Step>
+
+  <Step title="Customize the Server" icon="gear">
+    ```shell
+    nano ~/longvinter-server/Longvinter/Saved/Config/LinuxServer/Game.ini
+    ```
+
+    Add the following content:
+
+    ```ini
+    [/Game/Blueprints/Server/GI_AdvancedSessions.GI_AdvancedSessions_C]
+    ServerName=[EU-WEST] Arlo's Hangout
+    ServerMOTD=Welcome to Arlo's Hangout
+    MaxPlayers=64
+    Password=arlobest123
+    CommunityWebsite=discord.gg/longvinter
+    CoopPlay=false
+    CheckVPN=true
+    CoopSpawn=0
+    Tag=none
+    ChestRespawnTime=900
+    DisableWanderingTraders=false
+
+    [/Game/Blueprints/Server/GM_Longvinter.GM_Longvinter_C]
+    AdminSteamID=00023652dd9b4673be20d4f83ab42c5b 0002365d948ad82f373be20d4ff8ab42c5b
+    PVP=false
+    TentDecay=true
+    MaxTents=3
+    RestartTime24h=6
+    SaveBackups=true
+    ```
+
+    <Card title="Detailed Configuration Options" icon="gear" href="server/config">
+      Check our configuration page for detailed information on each setting.
+    </Card>
+  </Step>
+
+  <Step title="Run the Server" icon="play">
+    <Tabs>
+      <Tab title="Manual Start">
+        ### Start the server manually
+
+        ```shell
+        cd ~/longvinter-server
+        ./LongvinterServer.sh
+        ```
+      </Tab>
+      <Tab title="Automatic Start (Recommended)">
+        ### Start the server automatically with Systemd
+
+        Create a systemd service file:
+
+        ```shell
+        sudo nano /etc/systemd/system/longvinter.service
+        ```
+
+        Add the following content:
+
+        ```ini
+        [Unit]
+        Description=Longvinter Server
+        After=network.target
+
+        [Service]
+        Type=simple
+        User=steamcmd
+        WorkingDirectory=/home/steam/longvinter-server
+        ExecStart=/home/steam/longvinter-server/LongvinterServer.sh
+        Restart=on-failure
+
+        [Install]
+        WantedBy=multi-user.target
+        ```
+
+        Enable and start the service:
+
+        ```shell
+        sudo systemctl daemon-reload
+        sudo systemctl enable longvinter.service
+        sudo systemctl start longvinter.service
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+</Steps>
+
+## Server Maintenance
+
+<AccordionGroup>
+  <Accordion title="Updating the server">
+    ```shell
+    cd ~/longvinter-server
+    steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
+    ```
+  </Accordion>
+  <Accordion title="Backing up your saves">
+    ```shell
+    cp -r ~/longvinter-server/Longvinter/Saved ~/longvinter-backup-$(date +%Y%m%d)
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card title="FAQ" icon="question" href="server/faq">
+    Check our server FAQ page to find solutions for common issues.
+  </Card>
+  <Card title="Discord" icon="discord" href="https://discord.gg/longvinter">
+    Ask questions in our #dedicated-server-help channel on our Discord server.
+  </Card>
+  <Card title="Forums" icon="comments" href="https://forum.uuvana.com/t/longvinter-questions-and-help">
+    Post your questions on the Uuvana Forums for community support.
+  </Card>
+  <Card title="Contact Us" icon="envelope" href="mailto:support@longvinter.com">
+    For urgent issues, email our support team directly.
+  </Card>
+</CardGroup>
+

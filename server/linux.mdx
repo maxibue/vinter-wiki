@@ -154,65 +154,73 @@ SaveBackups=true
 
 </Step>
 
-<Step title="Run the Server" icon="play">
+  <Step title="Run the Server" icon="play">
+    <Tabs>
+      <Tab title="Manual Start">
+        ### Start the server manually
 
-### Start the server manually
+        ```shell
+        cd ~/longvinter-server
+        ./LongvinterServer.sh
+        ```
+      </Tab>
+      <Tab title="Automatic Start (Recommended)">
+        ### Start the server automatically with Systemd
 
-```shell
-cd ~/longvinter-server
-./LongvinterServer.sh
-```
+        Create a systemd service file:
 
-### Start the server automatically with Systemd (Recommended)
+        ```shell
+        sudo nano /etc/systemd/system/longvinter.service
+        ```
 
-Create a systemd service file:
+        Add the following content:
 
-```shell
-sudo nano /etc/systemd/system/longvinter.service
-```
+        ```ini
+        [Unit]
+        Description=Longvinter Server
+        After=network.target
 
-Add the following content:
+        [Service]
+        Type=simple
+        User=steamcmd
+        WorkingDirectory=/home/steam/longvinter-server
+        ExecStart=/home/steam/longvinter-server/LongvinterServer.sh
+        Restart=on-failure
 
-```ini
-[Unit]
-Description=Longvinter Server
-After=network.target
+        [Install]
+        WantedBy=multi-user.target
+        ```
 
-[Service]
-Type=simple
-User=steamcmd
-WorkingDirectory=/home/steam/longvinter-server
-ExecStart=/home/steam/longvinter-server/LongvinterServer.sh
-Restart=on-failure
+        Enable and start the service:
 
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start the service:
-
-```shell
-sudo systemctl daemon-reload
-sudo systemctl enable longvinter.service
-sudo systemctl start longvinter.service
-```
-
-</Step>
+        ```shell
+        sudo systemctl daemon-reload
+        sudo systemctl enable longvinter.service
+        sudo systemctl start longvinter.service
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
 
 <Step title="Server Maintenance" icon="traffic-cone">
+  <Tabs>
+    <Tab title="Updating the Server">
+      Run the following commands to update your Longvinter server:
 
-### Updating the server
+      ```shell
+      cd ~/longvinter-server
+      steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
+      ```
+    </Tab>
+    <Tab title="Backing Up Saves">
+      Use this command to create a backup of your server saves:
 
-```shell
-cd ~/longvinter-server
-steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
-```
-
-### Backing up your saves
-
-```shell
-cp -r ~/longvinter-server/Longvinter/Saved ~/longvinter-backup-$(date +%Y%m%d)
-```
+      ```shell
+      cp -r ~/longvinter-server/Longvinter/Saved ~/longvinter-backup-$(date +%Y%m%d)
+      ```
+      
+    </Tab>
+  </Tabs>
 </Step>
 </Steps>
 
