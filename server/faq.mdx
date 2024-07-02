@@ -99,6 +99,20 @@ If your question isn't answered here, please join our [Discord](https://discord.
 
   </Accordion>
 
+  <Accordion icon="flag" title="My server is showing up in the wrong region. What should I do?">
+
+  Please add below line to your configuration file.
+
+   <ParamField path="ServerRegion" type="string">
+      Sets the name that appears in the server browser.
+      
+      **Note:** Available regions are EU, NA, SA, AS, AU
+
+      **Example:** `ServerRegion=AS`
+    </ParamField>
+    
+  </Accordion>
+
   <Accordion icon="arrows-rotate" title="How do I update my Longvinter server?">
   
     <Tabs>
@@ -118,6 +132,7 @@ If your question isn't answered here, please join our [Discord](https://discord.
     
     After updating, restart your server.
   </Accordion>
+
 
 </AccordionGroup>
 
