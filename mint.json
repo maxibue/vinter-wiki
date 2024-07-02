@@ -30,9 +30,9 @@
 			"url": "https://discord.com/invite/longvinter"
 		},
   	{
-			"name": "Main Website",
-			"icon": "globe",
-			"url": "https://longvinter.com/"
+			"name": "Server Status",
+			"icon": "signal",
+			"url": "https://status.longvinter.com/"
 		},
     {
 			"name": "GitHub Repo",
