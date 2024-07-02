@@ -65,12 +65,38 @@ If your question isn't answered here, please join our [Discord](https://discord.
   <Accordion icon="triangle-exclamation" title="My server isn't showing up in the server list. What should I do?">
     If your server isn't showing up in the server list, try the following:
     
-    1. Ensure your server is running
-    2. Check that you've properly configured port forwarding for ports 7777 (UDP) and 27016 (TCP and UDP)
-    3. Verify that your firewall isn't blocking these ports
-    4. Restart your server and router
-    
-    If problems persist, check your server logs for any error messages.
+  <Steps>
+    <Step title="Check server status">
+      Ensure your server is running
+    </Step>
+    <Step title="Check port configuration">
+      Check that you've properly configured port forwarding for ports 7777 (UDP) and 27016 (TCP and UDP)
+    </Step>
+    <Step title="Check firewall configuration">
+      Verify that your firewall isn't blocking these ports
+    </Step>
+    <Step title="Restart systems">
+      Restart your server and router
+    </Step>
+  </Steps>
+
+ You can also try installing certificates as it might be related to your connection to EOS server.
+
+  <Steps>
+    <Step title="Install Certificate" icon="download">
+      Download [AmazonRootCA1](https://uo.uuvana.com/longvinter/assets/AmazonRootCA1.cer)
+    </Step>
+    <Step title="Check port configuration">
+      Check that you've properly configured port forwarding for ports 7777 (UDP) and 27016 (TCP and UDP)
+    </Step>
+    <Step title="Check firewall configuration">
+      Verify that your firewall isn't blocking these ports
+    </Step>
+    <Step title="Restart systems">
+      Restart your server and router
+    </Step>
+  </Steps>
+
   </Accordion>
 
   <Accordion icon="arrows-rotate" title="How do I update my Longvinter server?">
