@@ -19,15 +19,13 @@ Remember to restart your server after making changes to the configuration file f
       
       **Note:** Avoid using "OFFICIAL" in the name to prevent confusion with officially hosted servers.
 
-      **Example:** `[EU-WEST] Uuvana #PVE`
+      **Example:** `[EU-WEST] Arlo's Hangout`
     </ParamField>
 
-    <ParamField path="ServerTag" type="string" default="Default">
-      Adds a tag for easier server searching.
-      
-      **Note:** Use only one tag and avoid the word "OFFICIAL" to distinguish from official servers.
+    <ParamField path="ServerMOTD" type="string" default="Welcome to Longvinter Island!">
+      Sets the Message of the Day displayed on signs around the island.
 
-      **Example:** `PVE`
+      **Example:** `Welcome to Arlo's Hangout`
     </ParamField>
 
     <ParamField path="MaxPlayers" type="integer" default="32">
@@ -36,24 +34,26 @@ Remember to restart your server after making changes to the configuration file f
       **Example:** `64`
     </ParamField>
 
-    <ParamField path="ServerMOTD" type="string" default="Welcome to Longvinter Island!">
-      Sets the Message of the Day displayed on signs around the island.
-
-      **Example:** `Welcome to [EU-WEST] Uuvana #PVE`
-    </ParamField>
-
     <ParamField path="Password" type="string" default="">
       Sets a password for the server. Leave empty for no password.
       
       **Note:** Use only numbers and letters.
 
-      **Example:** `SecurePass123`
+      **Example:** `arloisbest123`
     </ParamField>
 
     <ParamField path="CommunityWebsite" type="string" default="www.longvinter.com">
       Promotes a website, displayed with the server message and openable in-game.
 
-      **Example:** `www.discord.gg/longvinter`
+      **Example:** `discord.gg/longvinter`
+    </ParamField>
+
+    <ParamField path="ServerTag" type="string" default="none">
+      Adds a tag for easier server searching.
+      
+      **Note:** Use only **one** tag and avoid the word "OFFICIAL" to distinguish from official servers.
+
+      **Example:** `PVE`
     </ParamField>
   </Accordion>
 
@@ -99,21 +99,33 @@ Remember to restart your server after making changes to the configuration file f
 
       **Example:** `900`
     </ParamField>
+
+    <ParamField path="DisableWanderingTraders" type="boolean" default="false">
+      Disables wandering traders from spawning
+
+      **Example:** `false`
+    </ParamField>
   </Accordion>
 
   <Accordion icon="user-gear" title="Admin Settings">
     <ParamField path="AdminSteamID" type="string" default="">
-      Assigns admin privileges to specified Steam IDs.
+      Assigns admin privileges to specified EOS IDs. You can get EOS ID from game settings. 
       
       **Note:** Add multiple IDs by separating them with a single space.
 
-      **Example:** `76561198965966997 76561198965966998`
+      **Example:** `00023652dd9b4673be20d4f83ab42c5b 0002365d948ad82f373be20d4ff8ab42c5b`
     </ParamField>
 
     <ParamField path="RestartTime24h" type="integer">
       Sets the daily restart time for the server (in 24-hour format).
 
-      **Example:** `6`
+      **Example:** `6` 
+    </ParamField>
+
+    <ParamField path="SaveBackups" type="boolean" default="false">
+      Saves backups once a day to two different folders
+
+      **Example:** `true` 
     </ParamField>
   </Accordion>
 </AccordionGroup>
@@ -123,18 +135,35 @@ Remember to restart your server after making changes to the configuration file f
 Here's an example of a fully configured `Game.ini` file:
 
 ```ini
-ServerName=[EU-WEST] Uuvana #PVE
-ServerTag=PVE
+[/Game/Blueprints/Server/GI_AdvancedSessions.GI_AdvancedSessions_C]
+ServerName=[EU-WEST] Arlo's Hangout
+ServerMOTD=Welcome to Arlo's Hangout
 MaxPlayers=64
-ServerMOTD=Welcome to [EU-WEST] Uuvana #PVE
-Password=SecurePass123
-CommunityWebsite=www.discord.gg/longvinter
+Password=arlobest123
+CommunityWebsite=discord.gg/longvinter
 CoopPlay=false
 CheckVPN=true
 CoopSpawn=0
-AdminSteamID=76561198965966997 76561198965966998
+Tag=none
+ChestRespawnTime=900
+DisableWanderingTraders=false
+
+[/Game/Blueprints/Server/GM_Longvinter.GM_Longvinter_C]
+AdminSteamID=00023652dd9b4673be20d4f83ab42c5b
 PVP=false
 TentDecay=true
 MaxTents=3
-ChestRespawnTime=900
 RestartTime24h=6
+SaveBackups=true
+```
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card title="FAQ" icon="question" href="server/faq">
+    Check our server FAQ page to find solutions for common issues.
+  </Card>
+  <Card title="Discord" icon="discord" href="https://discord.gg/longvinter">
+    Ask qeustions in our #dedicated-server-help channel located in our Discord server.
+  </Card>
+</CardGroup>
