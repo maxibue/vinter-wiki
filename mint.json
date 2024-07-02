@@ -40,10 +40,6 @@
 			"url": "https://github.com/uuvana-studios/vinter-wiki"
 		}
 	],
-  "topAnchor": {
-    "name": "Wiki",
-    "icon": "wiki"
-  },  
   "navigation": [
     {
       "group": "Get Started",
