@@ -23,7 +23,7 @@
     "name": "Get Started",
     "url": "https://discord.gg/longvinter"
   },
-		"anchors": [
+	"anchors": [
 		{
 			"name": "Discord Server",
 			"icon": "discord",
@@ -40,6 +40,10 @@
 			"url": "https://github.com/uuvana-studios/vinter-wiki"
 		}
 	],
+  "topAnchor": {
+    "name": "Wiki",
+    "icon": "wiki"
+  },  
   "navigation": [
     {
       "group": "Get Started",
