@@ -110,9 +110,8 @@ cp ~/steamcmd-source/linux64/steamclient.so ~/.steam/sdk64/
 <Step title="Install Longvinter Server" icon="download">
 
 ```shell
-cd ~/
-git clone https://github.com/Uuvana-Studios/longvinter-linux-server.git
-sudo chmod -R ugo+rwx longvinter-linux-server/
+cd ~/longvinter-server
+steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
 ```
 
 </Step>
@@ -120,7 +119,7 @@ sudo chmod -R ugo+rwx longvinter-linux-server/
 <Step title="Customize the Server" icon="gear">
 
 ```shell
-nano ~/longvinter-linux-server/Longvinter/Saved/Config/LinuxServer/Game.ini
+nano ~/longvinter-server/Longvinter/Saved/Config/LinuxServer/Game.ini
 ```
 
 Add the following content:
@@ -142,6 +141,10 @@ MaxTents=2
 ChestRespawnTime=600
 ```
 
+  <Card title="Configuration" icon="gear" href="server/config">
+    Check our our configuratioin page for detailed informations.
+  </Card>
+
 </Step>
 
 <Step title="Run the Server" icon="play">
@@ -149,15 +152,42 @@ ChestRespawnTime=600
 ### Start the server manually
 
 ```shell
-sh /home/steam/longvinter-linux-server/LongvinterServer.sh
+cd ~/longvinter-server
+./LongvinterServer.sh
 ```
 
 ### Start the server automatically with Systemd (Recommended)
 
+Create a systemd service file:
+
 ```shell
-sudo cp /home/steam/longvinter-linux-server/longvinter.service /etc/systemd/system/longvinter.service
-sudo cp /home/steam/longvinter-linux-server/longvinter.socket /etc/systemd/system/longvinter.socket
+sudo nano /etc/systemd/system/longvinter.service
+```
+
+Add the following content:
+
+```ini
+[Unit]
+Description=Longvinter Server
+After=network.target
+
+[Service]
+Type=simple
+User=steamcmd
+WorkingDirectory=/home/steam/longvinter-server
+ExecStart=/home/steam/longvinter-server/LongvinterServer.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start the service:
+
+```shell
 sudo systemctl daemon-reload
+sudo systemctl enable longvinter.service
+sudo systemctl start longvinter.service
 ```
 
 </Step>
@@ -167,16 +197,18 @@ sudo systemctl daemon-reload
 ### Updating the server
 
 ```shell
-bash /home/steam/longvinter-linux-server/LongvinterUpdate.sh
+cd ~/longvinter-server
+steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
 ```
 
 ### Backing up your saves
 
 ```shell
-bash /home/steam/longvinter-linux-server/LongvinterBackup.sh
+cp -r ~/longvinter-server/Longvinter/Saved ~/longvinter-backup-$(date +%Y%m%d)
 ```
 </Step>
 </Steps>
+
 ## Getting Help
 
 <CardGroup cols={2}>
@@ -190,4 +222,4 @@ bash /home/steam/longvinter-linux-server/LongvinterBackup.sh
 
 <Tip>Please contact **@alvar_noah** if there's any errors.</Tip>
 
-
+Would you like me to explain or break down any part of this modified guide?
