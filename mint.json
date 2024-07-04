@@ -1,30 +1,43 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "vinter.wiki",
+  "name": "Longvinter Wiki",
   "logo": {
     "dark": "/logo/MainLogo.png",
     "light": "/logo/MainLogo_dark.png"
   },
   "favicon": "/favicon.png",
-	"colors": {
-		"primary": "#8F64F2",
-		"light": "#BFA6F9",
-		"dark": "#6036BF"
-	},
-  "topbarCtaButton": {
-    "name": "Discord Bot",
-    "url": "vinter.wiki"
+  "colors": {
+    "primary": "#FAEBCB",
+    "light": "#FAEBCB",
+    "dark": "#FAEBCB",
+    "anchors": {
+      "from": "#202020",
+      "to": "#202020"
+    },
+    "background": {
+      "dark": "#14152F",
+      "light": "#ffffff"
+    }
   },
-		"anchors": [
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "https://discord.gg/longvinter"
+  },
+	"anchors": [
 		{
-			"name": "GitHub",
-			"icon": "github",
-			"url": "https://github.com/maximierung/vinter-wiki"
-		},
-		{
-			"name": "Community",
+			"name": "Discord Server",
 			"icon": "discord",
 			"url": "https://discord.com/invite/longvinter"
+		},
+  	{
+			"name": "Server Status",
+			"icon": "signal",
+			"url": "https://status.longvinter.com/"
+		},
+    {
+			"name": "GitHub Repo",
+			"icon": "github",
+			"url": "https://github.com/uuvana-studios/vinter-wiki"
 		}
 	],
   "navigation": [
@@ -70,11 +83,19 @@
     {
       "group": "Base",
       "pages": ["base/base", "base/greenhouse"]
+    },
+    {
+      "group": "Server",
+      "pages": ["server/server", "server/linux", "server/windows", "server/configuration", "server/faq"]
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/maximierung/vinter-wiki",
+    "github": "https://github.com/uuvana-studios",
     "discord": "https://discord.com/invite/longvinter"
+  },
+  "modeToggle": {
+  "default": "dark",
+  "isHidden": true
   },
   "backgroundImage": "/background.png"
 }

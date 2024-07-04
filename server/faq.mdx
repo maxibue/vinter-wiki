@@ -1,0 +1,158 @@
+---
+title: Longvinter Server FAQ
+description: 'Frequently asked questions about setting up and managing a Longvinter server.'
+icon: 'question'
+---
+
+<Note>
+If your question isn't answered here, please join our [Discord](https://discord.gg/longvinter) and ask in the #dedicated-server-help channel.
+</Note>
+
+## General Questions
+
+<AccordionGroup>
+  <Accordion icon="server" title="What are the minimum requirements to run a Longvinter server?">
+    The minimum requirements for running a Longvinter server are:
+    
+    - Min. 3 GB RAM
+    - Min. 64-bit Operating System (Windows or Linux)
+    - Min. CPU with at least 3GHz clock speed
+    - Broadband internet connection
+    - Router with the ability to port forward
+    - SteamCMD installed in your system
+  </Accordion>
+
+  <Accordion icon="globe" title="Can I run a Longvinter server on a VPS or dedicated server?">
+    Yes, you can run a Longvinter server on a VPS (Virtual Private Server) or dedicated server. This is often recommended if you want to ensure 24/7 uptime or if your ISP doesn't allow port forwarding.
+  </Accordion>
+
+  <Accordion icon="docker" title="Can I run a Longvinter server on a Docker container?">
+    Yes. You can refer to old server documentation for Docker installation in [Linux](https://docs-server.longvinter.com/linux/setup-docker/) or [Windows](https://docs-server.longvinter.com/linux/setup-docker/). 
+  </Accordion>
+
+  <Accordion icon="users" title="How many players can connect to a Longvinter server?">
+    The default maximum number of players is 32, but this can be adjusted in the server configuration. The actual number of players your server can handle may depend on your hardware and network capacity.
+  </Accordion>
+</AccordionGroup>
+
+## Setup and Configuration
+
+<AccordionGroup>
+  <Accordion icon="gear" title="How do I change the server configuration?">
+    To change the server configuration:
+    
+    1. Locate the `Game.ini` file in your server directory
+    2. Open it with a text editor
+    3. Modify the desired settings
+    4. Save the file
+    5. Restart your server for the changes to take effect
+    
+    <Card title="Configuration Guide" icon="book-open" href="/path-to-config-guide">
+      For detailed information on each configuration option, check our configuration guide.
+    </Card>
+  </Accordion>
+
+  <Accordion icon="lock" title="How do I set a password for my server?">
+    To set a password for your server, add the following line to your `Game.ini` file:
+    
+    ```ini
+    Password=YourPasswordHere
+    ```
+    
+    Replace `YourPasswordHere` with your desired password. Remember to use only letters and numbers.
+  </Accordion>
+  <Accordion icon="flag" title="How do I manually change server region?">
+
+  Servers might be listed in wrong regions occasionally. Please add below line to your configuration file to change region.
+
+   <ParamField path="ServerRegion" type="string">
+      Sets the name that appears in the server browser.
+      
+      **Note:** Available regions are EU, NA, SA, AS, AU
+
+      **Example:** `ServerRegion=AS`
+    </ParamField>
+      Then restart your server.
+  </Accordion>
+</AccordionGroup>
+
+
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion icon="list" title="My server isn't showing up in the server list. What should I do?">
+    If your server isn't showing up in the server list, try the following:
+    
+  <Steps>
+    <Step title="Check server status">
+      Ensure your server is running
+    </Step>
+    <Step title="Check port configuration">
+      Check that you've properly configured port forwarding for ports 7777 (UDP) and 27016 (TCP and UDP)
+    </Step>
+    <Step title="Check firewall configuration">
+      Verify that your firewall isn't blocking these ports
+    </Step>
+    <Step title="Restart systems">
+      Restart your server and router
+    </Step>
+  </Steps>
+
+ **You can also try installing certificates as it might be related to your connection to EOS server. Try the following:**
+
+  <Steps>
+    <Step title="Install Certificate" icon="download">
+      Download [certificates](https://uo.uuvana.com/longvinter/assets/Certificates.zip) for windows and run each one of them.
+    </Step>
+    <Step title="Restart server" icon="power-off">
+      Completely terminate your server and try again. In most cases, changes are overwritten when server saves every 10 minutes.
+    </Step>
+  </Steps>
+
+  </Accordion>
+
+    <Accordion icon="triangle-exclamation" title="My configuration changes are not applied. What should I do?">
+  
+  Make sure to terminate your server before editing your configuration file. 
+
+  </Accordion>
+
+  <Accordion icon="arrows-rotate" title="How do I update my Longvinter server?">
+  
+    <Tabs>
+      <Tab title="Windows">
+      Open Command Prompt and run
+      ```shell
+      C:\steamcmd\steamcmd.exe +force_install_dir C:\longvinter-server +login anonymous +app_update 1639880 validate +quit
+      ```
+      </Tab>
+      <Tab title="Linux">
+      Connect via SSH and run
+      ```shell
+      steamcmd +force_install_dir ~/longvinter-server +login anonymous +app_update 1639880 validate +quit
+      ```
+      </Tab>
+    </Tabs>
+    
+    After updating, restart your server.
+  </Accordion>
+
+</AccordionGroup>
+
+## Getting More Help
+
+If you're still having issues or have a question not answered here, we're here to help!
+
+<CardGroup cols={2}>
+  <Card title="Discord Support" icon="discord" href="https://discord.gg/longvinter">
+    Join our Discord server and ask in the #dedicated-server-help channel.
+  </Card>
+  <Card title="Uuvana Forums" icon="comments" href="https://forum.uuvana.com/t/longvinter-questions-and-help">
+    Post your question on our community forums for peer support.
+  </Card>
+</CardGroup>
+
+<Tip>
+When asking for help, please provide as much detail as possible about your setup and the issue you're experiencing. This will help us assist you more effectively.
+</Tip>

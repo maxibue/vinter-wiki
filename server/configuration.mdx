@@ -1,0 +1,191 @@
+---
+title: Server Configuration
+description: 'Detailed guide for configuring your Longvinter server.'
+icon: 'gear'
+---
+
+This guide provides a comprehensive explanation of each configuration option for your Longvinter server. These settings can be found in the `Game.ini` file located at `~/longvinter-server/Longvinter/Saved/Config/LinuxServer/Game.ini`.
+
+<Note>
+Remember to restart your server after making changes to the configuration file for the new settings to take effect.
+</Note>
+
+## Server Configuration
+
+<AccordionGroup>
+  <Accordion icon="server" title="Server Settings">
+    <ParamField path="ServerName" type="string" default="Unnamed Island">
+      Sets the name that appears in the server browser.
+      
+      **Note:** Avoid using "OFFICIAL" in the name to prevent confusion with officially hosted servers.
+
+      **Example:** `[EU-WEST] Arlo's Hangout`
+    </ParamField>
+
+    <ParamField path="ServerMOTD" type="string" default="Welcome to Longvinter Island!">
+      Sets the Message of the Day displayed on signs around the island.
+
+      **Example:** `Welcome to Arlo's Hangout`
+    </ParamField>
+
+    <ParamField path="MaxPlayers" type="integer" default="32">
+      Sets the maximum number of players that can connect simultaneously.
+
+      **Example:** `64`
+    </ParamField>
+
+    <ParamField path="Password" type="string" default="">
+      Sets a password for the server. Leave empty for no password.
+      
+      **Note:** Use only numbers and letters.
+
+      **Example:** `arloisbest123`
+    </ParamField>
+
+    <ParamField path="CommunityWebsite" type="string" default="www.longvinter.com">
+      Promotes a website, displayed with the server message and openable in-game.
+
+      **Example:** `discord.gg/longvinter`
+    </ParamField>
+
+    <ParamField path="ServerTag" type="string" default="none">
+      Adds a tag for easier server searching.
+      
+      **Note:** Use only **one** tag and avoid the word "OFFICIAL" to distinguish from official servers.
+
+      **Example:** `PVE`
+    </ParamField>
+  </Accordion>
+
+  <Accordion icon="users-rectangle" title="Gameplay Settings">
+    <ParamField path="CoopPlay" type="boolean" default="false">
+      Enables or disables cooperative play mode.
+
+      **Example:** `false`
+    </ParamField>
+
+    <ParamField path="CheckVPN" type="boolean" default="true">
+      Enables or disables VPN checking for connecting players.
+
+      **Example:** `true`
+    </ParamField>
+
+    <ParamField path="CoopSpawn" type="integer" default="0">
+      Sets the cooperative spawn point on the island.
+
+      **Example:** `0`
+    </ParamField>
+
+    <ParamField path="PVP" type="boolean" default="true">
+      Enables or disables Player versus Player combat.
+
+      **Example:** `false`
+    </ParamField>
+
+    <ParamField path="TentDecay" type="boolean" default="true">
+      Enables or disables tent decay to manage abandoned tents.
+
+      **Example:** `true`
+    </ParamField>
+
+    <ParamField path="MaxTents" type="integer" default="2">
+      Sets the maximum number of tents players can place on the server.
+
+      **Example:** `3`
+    </ParamField>
+
+    <ParamField path="ChestRespawnTime" type="integer" default="600">
+      Sets the maximum respawn time (in seconds) for loot chests.
+
+      **Example:** `900`
+    </ParamField>
+
+    <ParamField path="DisableWanderingTraders" type="boolean" default="false">
+      Disables wandering traders from spawning
+
+      **Example:** `false`
+    </ParamField>
+  </Accordion>
+
+  <Accordion icon="user-gear" title="Admin Settings">
+    <ParamField path="AdminSteamID" type="string" default="">
+      Assigns admin privileges to specified EOS IDs. You can get EOS ID from game settings. 
+      
+      **Note:** Add multiple IDs by separating them with a single space.
+
+      **Example:** `00023652dd9b4673be20d4f83ab42c5b 0002365d948ad82f373be20d4ff8ab42c5b`
+    </ParamField>
+
+    <ParamField path="RestartTime24h" type="integer">
+      Sets the daily restart time for the server (in 24-hour format).
+
+      **Example:** `6` 
+    </ParamField>
+
+    <ParamField path="SaveBackups" type="boolean" default="false">
+      Saves backups once a day to two different folders
+
+      **Example:** `true` 
+    </ParamField>
+  </Accordion>
+</AccordionGroup>
+
+## Example Configuration
+
+Here's an example of a fully configured `Game.ini` file:
+
+```ini
+[/Game/Blueprints/Server/GI_AdvancedSessions.GI_AdvancedSessions_C]
+ServerName=[EU-WEST] Arlo's Hangout
+ServerMOTD=Welcome to Arlo's Hangout
+MaxPlayers=64
+Password=arlobest123
+CommunityWebsite=discord.gg/longvinter
+CoopPlay=false
+CheckVPN=true
+CoopSpawn=0
+Tag=none
+ChestRespawnTime=900
+DisableWanderingTraders=false
+
+[/Game/Blueprints/Server/GM_Longvinter.GM_Longvinter_C]
+AdminSteamID=00023652dd9b4673be20d4f83ab42c5b 0002365d948ad82f373be20d4ff8ab42c5b
+PVP=false
+TentDecay=true
+MaxTents=3
+RestartTime24h=6
+SaveBackups=true
+```
+
+## Server Parameters
+
+When running your Longvinter server, you can use the following parameters to customize its behavior:
+
+<ParamField query="-GamePort" type="integer" default="7777">
+  Sets the port that the game uses for client connections.
+
+  **Example:** `-GamePort=7777`
+</ParamField>
+
+<ParamField query="-QueryPort" type="integer" default="27016">
+  Sets the port used for server queries (e.g., server browser listings).
+
+  **Example:** `-QueryPort=27016`
+</ParamField>
+
+You can use these parameters when starting your server. For example:
+
+```shell
+LongvinterServer.exe -GamePort=7777 -QueryPort=27016
+```
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card title="FAQ" icon="question" href="/server/faq">
+    Check our server FAQ page to find solutions for common issues.
+  </Card>
+  <Card title="Discord" icon="discord" href="https://discord.gg/longvinter">
+    Ask qeustions in our #dedicated-server-help channel located in our Discord server.
+  </Card>
+</CardGroup>

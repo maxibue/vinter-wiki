@@ -1,0 +1,238 @@
+---
+title: Linux Server Setup
+description: 'Guide for setting up a Longvinter server on Linux.'
+icon: 'linux'
+---
+
+<Note>If you have any trouble following this guide, please send us a message on [Discord](https://discord.gg/longvinter) or the [Uuvana Forums](https://forum.uuvana.com/t/longvinter-questions-and-help). We are more than happy to help you out!</Note>
+
+## Requirements and Pre-requisites
+
+- Min. 2 GB RAM 
+- Min. 64-bit Linux Operating System
+- Min. CPU with least 3GHz clock speed
+- Broadband internet connection
+- Router with the ability to port forward 
+- SteamCMD installed in your system
+
+<Warning>Some ISPs might not allow you to port forward. In such case, we recommend you to purchase VPS / Dedicated Server services.</Warning>
+
+## Installing Server
+
+<Steps>
+    <Step title="System Setup" icon="user-plus">
+
+    ### Creating user and group to run the server
+
+    ```shell
+    sudo useradd -m -d /home/steam steamcmd
+    sudo passwd steamcmd
+    sudo usermod -aG sudo steamcmd
+    sudo su steamcmd
+    ```
+
+    ### Installing SteamCMD
+    
+    <Tabs>
+    <Tab title="Ubuntu/Debian">
+        ```shell
+        sudo apt update
+        sudo apt install lib32gcc-s1 steamcmd
+        ```
+    </Tab>
+    <Tab title="Arch">
+        ```shell
+        sudo pacman -Sy
+        git clone https://aur.archlinux.org/steamcmd.git
+        cd steamcmd
+        makepkg -si
+        sudo ln -s /usr/games/steamcmd /home/steam/steamcmd
+        ```
+    </Tab>
+    <Tab title="Fedora">
+        ```shell
+        sudo yum update
+        sudo yum install steamcmd
+        ```
+    </Tab>
+    </Tabs>
+
+   ### Making directory for Longvinter server
+    ```shell
+    sudo mkdir longvinter-server
+    ```
+    </Step>
+
+<Step title="Steam SDK Setup" icon="steam">
+```shell
+cd ~/
+mkdir steamcmd-source
+cd steamcmd-source
+wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+tar -xvzf steamcmd_linux.tar.gz
+./steamcmd.sh +force_install_dir . +login anonymous +app_update 1007 +quit
+```
+
+### Copying Steam SDK to the right place
+
+```shell
+cd ~/.steam
+mkdir sdk64
+cp ~/steamcmd-source/linux64/steamclient.so ~/.steam/sdk64/
+```
+
+</Step>
+
+<Step title="Configure Port-forwarding and Firewalls" icon="block-brick-fire">
+
+<Note>**Warning:** In other tutorials it is asked to open the TCP Port 7777, do not do it. Unreal Engine doesn't use TCP connections - you would be leaving an unused port open by doing so!</Note>
+
+<Tabs>
+  <Tab title="IPTables">
+    ```shell
+    sudo iptables -I INPUT -p udp --dport 7777 -j ACCEPT
+    sudo iptables -I INPUT -p udp --dport 27016 -j ACCEPT
+    sudo iptables -I INPUT -p tcp --dport 27016 -j ACCEPT
+    sudo iptables -I INPUT -p udp --dport 27015 -j ACCEPT
+    sudo iptables -I INPUT -p tcp --dport 27015 -j ACCEPT
+    ```
+  </Tab>
+  <Tab title="Uncomplicated Firewall (UFW)">
+    ```shell
+    sudo ufw allow 7777/udp
+    sudo ufw allow 27016
+    sudo ufw allow 27015
+    ```
+  </Tab>
+</Tabs>
+
+</Step>
+
+<Step title="Install Longvinter Server" icon="download">
+
+```shell
+cd ~/longvinter-server
+steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
+```
+
+</Step>
+
+<Step title="Customize the Server" icon="gear">
+
+```shell
+nano ~/longvinter-server/Longvinter/Saved/Config/LinuxServer/Game.ini
+```
+
+Add the following content:
+
+```ini
+[/Game/Blueprints/Server/GI_AdvancedSessions.GI_AdvancedSessions_C]
+ServerName=[EU-WEST] Arlo's Hangout
+ServerMOTD=Welcome to Arlo's Hangout
+MaxPlayers=64
+Password=arlobest123
+CommunityWebsite=discord.gg/longvinter
+CoopPlay=false
+CheckVPN=true
+CoopSpawn=0
+Tag=none
+ChestRespawnTime=900
+DisableWanderingTraders=false
+
+[/Game/Blueprints/Server/GM_Longvinter.GM_Longvinter_C]
+AdminSteamID=00023652dd9b4673be20d4f83ab42c5b 0002365d948ad82f373be20d4ff8ab42c5b
+PVP=false
+TentDecay=true
+MaxTents=3
+RestartTime24h=6
+SaveBackups=true
+```
+
+  <Card title="Configuration" icon="gear" href="/server/configuration">
+    Check our our configuratioin page for detailed informations.
+  </Card>
+
+</Step>
+
+  <Step title="Run the Server" icon="play">
+    <Tabs>
+      <Tab title="Manual Start">
+        ### Start the server manually
+
+        ```shell
+        cd ~/longvinter-server
+        ./LongvinterServer.sh
+        ```
+      </Tab>
+      <Tab title="Automatic Start (Recommended)">
+        ### Start the server automatically with Systemd
+
+        Create a systemd service file:
+
+        ```shell
+        sudo nano /etc/systemd/system/longvinter.service
+        ```
+
+        Add the following content:
+
+        ```ini
+        [Unit]
+        Description=Longvinter Server
+        After=network.target
+
+        [Service]
+        Type=simple
+        User=steamcmd
+        WorkingDirectory=/home/steam/longvinter-server
+        ExecStart=/home/steam/longvinter-server/LongvinterServer.sh
+        Restart=on-failure
+
+        [Install]
+        WantedBy=multi-user.target
+        ```
+
+        Enable and start the service:
+
+        ```shell
+        sudo systemctl daemon-reload
+        sudo systemctl enable longvinter.service
+        sudo systemctl start longvinter.service
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+<Step title="Server Maintenance" icon="traffic-cone">
+  <Tabs>
+    <Tab title="Updating the Server">
+      Run the following commands to update your Longvinter server:
+
+      ```shell
+      cd ~/longvinter-server
+      steamcmd +force_install_dir . +login anonymous +app_update 1639880 validate +quit
+      ```
+    </Tab>
+    <Tab title="Backing Up Saves">
+      Use this command to create a backup of your server saves:
+
+      ```shell
+      cp -r ~/longvinter-server/Longvinter/Saved ~/longvinter-backup-$(date +%Y%m%d)
+      ```
+      
+    </Tab>
+  </Tabs>
+</Step>
+</Steps>
+
+## Getting Help
+
+<CardGroup cols={2}>
+  <Card title="FAQ" icon="question" href="/server/faq">
+    Check our server FAQ page to find solutions for common issues.
+  </Card>
+  <Card title="Discord" icon="discord" href="https://discord.gg/longvinter">
+    Ask qeustions in our #dedicated-server-help channel located in our Discord server.
+  </Card>
+</CardGroup>
+
+<Tip>Please contact **@alvar_noah** if there's any errors.</Tip>
