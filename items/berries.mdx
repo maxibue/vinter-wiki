@@ -1,204 +1,64 @@
 ---
 title: 'Berries'
-description: 'Information about all berries.'
+description: 'Information about all berries in the game.'
 icon: 'blueberries'
 ---
 
-<Note>All locations named for obtaining the berries are not exclusive, meaning you can also find the berries somewhere else on the map.</Note>
+<Callout type="info">
+  All locations named for obtaining the berries are not exclusive, meaning you can also find the berries somewhere else on the map.
+</Callout>
 
-<Note>All sell prices are only for [James General Store](../map/james_general_store).</Note>
+<Callout type="warning">
+  All sell prices are only for [James General Store](../map/james_general_store).
+</Callout>
 
-<CardGroup cols={2}>
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Cloudberries
+## Quick Comparison
 
-**Description:** "Golden berries of the north"
+| Berry Name | Energy | Price (Mk) | Location |
+|------------|--------|------------|----------|
+| Cloudberries | +12 | 19 | Koilot Harbor |
+| Mezereons | -40 | 3 | Pix's Island |
+| Raspberries | +10 | 9 | Artur's Outpost |
+| Blackberries | +8 | 2 | Artur's Outpost |
+| Blueberry | +10 | 9 | Diogo's Dock |
+| Lingonberry | +12 | 8 | Grunni island |
 
-**Item-ID:** 3
+## Detailed Information
 
-**Obtainable:** Cloudberry bush (found near Koilot Harbor)
+<AccordionGroup>
 
-**Craftable:** No
+<Accordion title="Cloudberries" icon="https://uo.uuvana.com/longvinter/assets/img/T_IconCloudberry.svg">
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Cloudberries  
+      **Description:** "Golden berries of the north"  
+      **Item-ID:** 3  
+      **Obtainable:** Cloudberry bush (found near Koilot Harbor)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 19 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** +12  
+    </div>
+    <img height="128" width="128" style={{ borderRadius: '0.5rem' }} src="https://i.imgur.com/XBKcdXZ.png" />
+  </div>
+</Accordion>
 
-**Sellable:** Yes
+<Accordion title="Mezereons">
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Mezereons  
+      **Description:** "Looks poisonous"  
+      **Item-ID:** 20  
+      **Obtainable:** Mezereon bush (found on Pix's Island)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 3 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** -40  
+    </div>
+    <img height="128" width="128" style={{ borderRadius: '0.5rem' }} src="https://i.imgur.com/aoSgfg4.png" />
+  </div>
+</Accordion>
 
-**Price:** 19 Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** +12
-</div>
-<img
-height="128"
-width="128"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/XBKcdXZ.png"
-/>
-</div>
-</Card>
-
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Mezereons
-
-**Description:** "Looks poisonous"
-
-**Item-ID:** 20
-
-**Obtainable:** Mezereon bush (found on Pix's Island)
-
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** 3 Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** -40
-</div>
-<img
-height="128"
-width="128"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/aoSgfg4.png"
-/>
-</div>
-</Card>
-
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Raspberries
-
-**Description:** "Why is it pink?"
-
-**Item-ID:** 23
-
-**Obtainable:** Raspberry bush (found near Artur's Outpost)
-
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** 9 Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** +10
-</div>
-<img
-height="128"
-width="128"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/re2MQGM.png"
-/>
-</div>
-</Card>
-
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Blackberries
-
-**Description:** "This one likes more dry places"
-
-**Item-ID:** 24
-
-**Obtainable:** Blackberry bush (found near Artur's Outpost)
-
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** 2 Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** +8
-</div>
-<img
-height="128"
-width="128"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/idJSTbs.png"
-/>
-</div>
-</Card>
-
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Blueberry
-
-**Description:** "Commonly found and universally loved"
-
-**Item-ID:** 392
-
-**Obtainable:** Blueberry bush (found near Diogo's Dock)
-
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** 9 Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** +10
-</div>
-<img
-height="128"
-width="128"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/HL19yXv.png"
-/>
-</div>
-</Card>
-
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Lingonberry
-
-**Description:** "A small, tart, red berry that's both juicy and flavorful!"
-
-**Item-ID:** 393
-
-**Obtainable:** Lingonberry bush (found on Grunni island)
-
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** 8 Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** +12
-</div>
-<img
-height="128"
-width="128"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/rEBWyDk.png"
-/>
-</div>
-</Card>
-
-</CardGroup>
+</AccordionGroup>
