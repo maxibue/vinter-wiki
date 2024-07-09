@@ -4,9 +4,18 @@ description: 'Information on the fishing skill and more.'
 icon: 'fishing-rod'
 ---
 
-<div style={{ overflow: 'hidden' }}>
-
 Fishing is a skill that is used to catch fish. There are ten types of fish obtainable by fishing in Longvinter. Fishing requires a fishing rod and is only possible at designated fishing spots. Caught fish can be cooked to procure food that can restore energy.
+
+## Key Features
+
+<CardGroup cols={2}>
+  <Card title="Catch Fish" icon="fish">
+    Fish at designated spots to catch various types of fish.
+  </Card>
+  <Card title="Sell or Cook" icon="utensils">
+    Sell your catch for profit or cook it to restore energy.
+  </Card>
+</CardGroup>
 
 ## How to fish
 
@@ -16,10 +25,9 @@ To actually fish, players have to cast their line with a fishing rod in their in
 
 As fish are caught, they will pop up displaying their type along with a brief description. Players can cook or sell the fish.
 
-<img
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/369a5K2.png"
-/>
+<Frame>
+  <img src="https://i.imgur.com/369a5K2.png" alt="Fishing in Longvinter" />
+</Frame>
 
 ## Rod-Overview
 
@@ -27,33 +35,43 @@ As fish are caught, they will pop up displaying their type along with a brief de
 | ---- | ---------- | ------ |
 | Fishing Rod | Common Crates, Sgt. Lake's Kitchen | None |
 | Bait Buster | Crafting (Blueprint required!), Common Crates, PVP Arenas, Bunkers, Airdrops | Faster fishing by 50%. |
+| Telescopic Reel | Common Crates| Fishing from further spot |
 | The Reel Of Fortune | Crafting (Blueprint required!), Sgt. Lake (NPC) | Fish spots can not deplete but fishing is slower by 15%. |
 
 ## Fish-Overview
 
-| Name | Energy | Selling Price | Selling Location |
-| ---- | ------ | ------------- | ---------------- |
-| Perch | 15 | ~30 Mk | Sgt. Lake's Kitchen |
-| Pike | 25 | ~60 Mk | Sgt. Lake's Kitchen |
-| Trout | 35 | ~120 Mk | Sgt. Lake's Kitchen |
-| Rainbow Trout | 60 | ~270 Mk | Sgt. Lake's Kitchen, Sgt. Lake (NPC) |
-| Whitefish | 30 | ~160 Mk | Sgt. Lake's Kitchen |
-| Haddock | 30 | ~60 Mk | Sgt. Lake's Kitchen |
-| Cod | 30 | ~150 Mk | Sgt. Lake's Kitchen |
-| Salmon | 10 | ~100 Mk | Sgt. Lake's Kitchen |
-| Catfish | 30 | ~140 Mk | Sgt. Lake's Kitchen |
-| Arctic Char | 70 | ~2,100 Mk | Sgt. Lake (NPC) |
-| Redfish | 60 | ? | ? |
-| Salmon Shark | 90 | ~3,150 Mk | Sgt. Lake (NPC) |
-| Black Grouper | 60 | ? | ? |
-| Misty Grouper | 80 | ~4,200 Mk | Sgt. Lake (NPC) |
-| Stingray | 50 | ~1,030 Mk | Sgt. Lake (NPC) |
-| Swordfish | 70 | ~2,050 Mk | Sgt. Lake (NPC) |
-| Tuna | 35 | ~220 Mk | Sgt. Lake's Kitchen |
+<Tabs>
+  <Tab title="Common Fish">
+    | Name | Energy | Selling Price | Selling Location |
+    | ---- | ------ | ------------- | ---------------- |
+    | Perch | 15 | ~30 Mk | Sgt. Lake's Kitchen |
+    | Pike | 25 | ~60 Mk | Sgt. Lake's Kitchen |
+    | Trout | 35 | ~120 Mk | Sgt. Lake's Kitchen |
+    | Whitefish | 30 | ~160 Mk | Sgt. Lake's Kitchen |
+    | Haddock | 30 | ~60 Mk | Sgt. Lake's Kitchen |
+    | Cod | 30 | ~150 Mk | Sgt. Lake's Kitchen |
+    | Salmon | 10 | ~100 Mk | Sgt. Lake's Kitchen |
+    | Catfish | 30 | ~140 Mk | Sgt. Lake's Kitchen |
+    | Tuna | 35 | ~220 Mk | Sgt. Lake's Kitchen |
+  </Tab>
+  <Tab title="Rare Fish">
+    | Name | Energy | Selling Price | Selling Location |
+    | ---- | ------ | ------------- | ---------------- |
+    | Rainbow Trout | 60 | ~270 Mk | Sgt. Lake's Kitchen, Sgt. Lake (NPC) |
+    | Arctic Char | 70 | ~2,100 Mk | Sgt. Lake (NPC) |
+    | Redfish | 60 | ? | ? |
+    | Salmon Shark | 90 | ~3,150 Mk | Sgt. Lake (NPC) |
+    | Black Grouper | 60 | ? | ? |
+    | Misty Grouper | 80 | ~4,200 Mk | Sgt. Lake (NPC) |
+    | Stingray | 50 | ~1,030 Mk | Sgt. Lake (NPC) |
+    | Swordfish | 70 | ~2,050 Mk | Sgt. Lake (NPC) |
+  </Tab>
+</Tabs>
 
-<img
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/mkuqH1V.png"
-/>
+<Frame>
+  <img src="https://i.imgur.com/mkuqH1V.png" alt="Fish Compendium" />
+</Frame>
 
-</div>
+<Callout type="info">
+  Prices and availability may vary. Always check the latest game updates for the most accurate information.
+</Callout>
