@@ -1,132 +1,186 @@
 ---
 title: 'Berries'
-description: 'Info about all berry items.'
+description: 'Information about all berries in the game.'
 icon: 'blueberries'
 ---
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Cloudberries
 
-**Description:** "Golden berries of the north"
+<Callout type="info">
+  All locations named for obtaining the berries are not exclusive, meaning you can also find the berries somewhere else on the map.
+</Callout>
 
-**Item-ID:** 3
+<Callout type="warning">
+  All sell prices are only for [James General Store](../map/james_general_store).
+</Callout>
 
-**Obtainable:** Cloudberry bush, Common Crates, PVP Arenas, Bunkers, Airdrops
+## Quick Comparison
 
-**Craftable:** No
+| Berry Name | Energy | Price (Mk) | Location |
+|------------|--------|------------|----------|
+| Cloudberries | +12 | 19 | Koilot Harbor |
+| Mezereons | -40 | 3 | Pix's Island |
+| Raspberries | +10 | 9 | Artur's Outpost |
+| Blackberries | +8 | 2 | Artur's Outpost |
+| Blueberry | +10 | 9 | Diogo's Dock |
+| Lingonberry | +12 | 8 | Grunni island |
 
-**Sellable:** Yes
+## Detailed Information
 
-**Price:** ? Mk
+<AccordionGroup>
 
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
+<Accordion 
+  title="Cloudberries" 
+  icon={
+    <img 
+      src="https://uo.uuvana.com/longvinter/assets/img/T_IconCloudberry.png" 
+      alt="Cloudberry Icon" 
+      width="24" 
+      height="24"
+    />
+  }
+>
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Cloudberries  
+      **Description:** "Golden berries of the north"  
+      **Item-ID:** 3  
+      **Obtainable:** Cloudberry bush (found near Koilot Harbor)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 19 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** +12  
+    </div>
+  </div>
+</Accordion>
 
-**Energy:** +12
-</div>
-<img
-height="96"
-width="96"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/XBKcdXZ.png"
-/>
-</div>
-</Card>
+<Accordion 
+  title="Mezereons" 
+  icon={
+    <img 
+      src="https://i.imgur.com/aoSgfg4.png" 
+      alt="Mezereon Icon" 
+      width="24" 
+      height="24"
+    />
+  }
+>
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Mezereons  
+      **Descrhhiption:** "Looks poisonous"  
+      **Item-ID:** 20  
+      **Obtainable:** Mezereon bush (found on Pix's Island)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 3 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** -40  
+    </div>
+  </div>
+</Accordion>
 
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Mezereons
+<Accordion 
+  title="Raspberries" 
+  icon={
+    <img 
+      src="https://i.imgur.com/re2MQGM.png" 
+      alt="Raspberry Icon" 
+      width="24" 
+      height="24"
+    />
+  }
+>
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Raspberries   
+      **Description:** "Why is it pink?"  
+      **Item-ID:** 23  
+      **Obtainable:** Raspberry bush (found near Artur's Outpost)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 9 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** +10  
+    </div>
+  </div>
+</Accordion>
 
-**Description:** "Looks poisonous"
+<Accordion 
+  title="Blackberries" 
+  icon={
+    <img 
+      src="https://i.imgur.com/idJSTbs.png" 
+      alt="Blackberry Icon" 
+      width="24" 
+      height="24"
+    />
+  }
+>
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Blackberries    
+      **Description:** "This one likes more dry places"  
+      **Item-ID:** 24  
+      **Obtainable:** Blackberry bush (found near Artur's Outpost)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 2 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** +8  
+    </div>
+  </div>
+</Accordion>
 
-**Item-ID:** 20
+<Accordion 
+  title="Blueberry" 
+  icon={
+    <img 
+      src="https://i.imgur.com/HL19yXv.png" 
+      alt="Blueberry Icon" 
+      width="24" 
+      height="24"
+    />
+  }
+>
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Blueberry   
+      **Description:** "Commonly found and universally loved"  
+      **Item-ID:** 392  
+      **Obtainable:** Blueberry bush (found near Diogo's Dock)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 9 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** +10  
+    </div>
+  </div>
+</Accordion>
 
-**Obtainable:** Mezereon bush, Common Crates, PVP Arenas, Bunkers, Airdrops
+<Accordion 
+  title="Lingonberry" 
+  icon={
+    <img 
+      src="https://i.imgur.com/rEBWyDk.png" 
+      alt="Lingonberry Icon" 
+      width="24" 
+      height="24"
+    />
+  }
+>
+  <div className="flex flex-row space-x-4">
+    <div>
+      **Name:** Lingonberry   
+      **Description:** "A small, tart, red berry that's both juicy and flavorful!"  
+      **Item-ID:** 393  
+      **Obtainable:** Lingonberry bush (found on Grunni island)  
+      **Craftable:** No  
+      **Sellable:** Yes  
+      **Price:** 8 Mk  
+      **Cooking Type:** Berry  
+      **Energy:** +12  
+    </div>
+  </div>
+</Accordion>
 
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** ? Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** -40
-</div>
-<img
-height="96"
-width="96"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/aoSgfg4.png"
-/>
-</div>
-</Card>
-
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Raspberries
-
-**Description:** "Why is it pink?"
-
-**Item-ID:** 23
-
-**Obtainable:** Raspberry bush, Common Crates, PVP Arenas, Bunkers, Airdrops
-
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** ? Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** +10
-</div>
-<img
-height="96"
-width="96"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/re2MQGM.png"
-/>
-</div>
-</Card>
-
-<Card>
-<div className="flex flex-row space-x-8">
-<div>
-<p className="text-xl mb-2">**__Item Information:__**</p>
-**Name:** Blackberries
-
-**Description:** "This one likes more dry places"
-
-**Item-ID:** 24
-
-**Obtainable:** Blackberry bush, Common Crates, PVP Arenas, Bunkers, Airdrops
-
-**Craftable:** No
-
-**Sellable:** Yes
-
-**Price:** ? Mk
-
-<p className="text-xl mt-6 mb-2">**__Food Attributes:__**</p>
-**Cooking Type:** Berry
-
-**Energy:** +8
-</div>
-<img
-height="96"
-width="96"
-  style={{ borderRadius: '0.5rem' }}
-  src="https://i.imgur.com/idJSTbs.png"
-/>
-</div>
-</Card>
+</AccordionGroup>
